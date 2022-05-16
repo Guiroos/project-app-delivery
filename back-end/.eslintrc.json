@@ -17,5 +17,12 @@
         "@typescript-eslint"
     ],
     "rules": {
-    }    
+    },
+    "ignorePatterns": [
+        "src/database/",
+        "node_modules",
+        "dist",
+        "jest.config.js",
+        "babel.config.js"
+    ]
 }
