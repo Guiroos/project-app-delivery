@@ -1,5 +1,5 @@
 const port = process.env.PORT || 3001;
-const appLive = require('./app.ts');
+const app = require('./app');
 
-appLive.listen(port);
+app.listen(port);
 console.log(`Api rodando na porta ${port}`);
