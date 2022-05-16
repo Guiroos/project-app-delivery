@@ -8,21 +8,15 @@
     "extends": [
         "airbnb-base"
     ],
-    "parser": "@typescript-eslint/parser",
+    "parser": "",
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        "ecmaVersion": "latest"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "plugins": [],
     "rules": {
     },
     "ignorePatterns": [
         "src/database/",
-        "node_modules",
-        "dist",
-        "jest.config.js",
-        "babel.config.js"
+        "node_modules"
     ]
 }
