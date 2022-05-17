@@ -9,7 +9,7 @@ body {
   background-color: rgba(100, 21, 129, 0.568);
 }
 
-.login {
+.login, .register{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ body {
   width: 200px;
 }
 
-.login_form {
+.login_form, .register_form {
   margin: 0 auto;
   font-size: 1.5em;
   width: 600px;
@@ -34,7 +34,7 @@ body {
   border-radius: 20px;
 }
 
-.login_form Button {
+.login_form Button, .register_form Button {
   margin: 20px;
   padding: 10px;
   cursor: pointer;
