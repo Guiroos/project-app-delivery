@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgba(100, 21, 129, 0.568);
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.login-logo {
+  top: 100px;
+  position: absolute;
+  height: 200px;
+  width: 200px;
+}
+
+.login_form {
+  margin: 0 auto;
+  font-size: 1.5em;
+  width: 600px;
+  padding: 30px;
+  background: #f9f9f9;
+  border: 2px solid rgb(51, 51, 51);
+  border-radius: 20px;
+}
+
+.login_form Button {
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+  display: flexbox;
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
