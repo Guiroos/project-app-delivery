@@ -32,6 +32,11 @@ body {
   justify-content: center;
 }
 
+.nav-link:hover, .nav_item:hover {
+  background-color: rgb(100, 21, 129);
+  color: rgb(255, 255, 255);
+}
+
 .login, .register{
   display: flex;
   justify-content: center;
