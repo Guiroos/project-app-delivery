@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import FormLogin from '../components/LoginForm';
+import LoginForm from '../components/LoginForm';
 import Image from 'react-bootstrap/Image';
 import image from '../images/doughnut_logo.png'
 import { getItemLocalStorage } from '../services';
@@ -27,9 +27,7 @@ export default function Login() {
     <div className="login">
       <Image src={ image } alt="logo" className="login-logo"/>
       {isLogin && navigate(path)}
-      <div className="login_form">
-        <FormLogin />
-      </div>
+      <LoginForm />
     </div>
   );
 }

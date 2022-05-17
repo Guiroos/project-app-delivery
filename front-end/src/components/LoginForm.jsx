@@ -9,7 +9,7 @@ import {
   STATUS,
 } from '../services';
 
-export default function FormLogin() {
+export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const {
@@ -54,14 +54,13 @@ export default function FormLogin() {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form className="login_form" onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId="email">
         <Form.Label>Email</Form.Label>
         <Form.Control
         type="email"
         name="email"
-        data-testid="common_login__input-email"
-        placeholder="email@trybeer.com.br"
+        placeholder="email@site.com.br"
         { ...register('email', {
           required: true,
           pattern: {
@@ -76,7 +75,6 @@ export default function FormLogin() {
       <Form.Control
         type="password"
         name="password"
-        data-testid="common_login__input-password"
         placeholder="******"
         { ...register('password', {
           required: true,
