@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar, ProductCard } from '../components';
+import { Navbar, ProductCard, ProductCheckoutButton } from '../components';
 import { CartProvider } from '../contexts';
 import { apiGet } from '../services';
 import Row from 'react-bootstrap/Row';
@@ -26,9 +26,9 @@ export default function Products() {
       <Navbar />
       <CartProvider>
         <Container className="products_page_container" fluid="md">
-          <Row xs={1} md={4} className="g-4">
+          <Row xs={1} md={4} className="g-4 products_page_container_cards">
             {products.map((product) => (
-              <Col>
+              <Col key={ product.id }>
                 <ProductCard
                   key={ product.id }
                   id={ product.id }
@@ -40,6 +40,7 @@ export default function Products() {
             ))}
           </Row>
         </Container>
+      <ProductCheckoutButton />
       </CartProvider>
     </main>
   );
