@@ -53,7 +53,7 @@ export default function ProductsCard({ id, name, price, urlImage }) {
       </Card.ImgOverlay>
       <Card.Body className="card_body">
         <Card.Title
-          className="card__name text-white"
+          className="card_name text-white"
         >
           {name}
         </Card.Title>
