@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import { getItemLocalStorage, removeFromLocalStorage } from '../services';
 import { useNavigate } from 'react-router-dom';
 
-export default function NavBarBS() {
+export default function Navbar() {
   const [user, setUser] = useState('');
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export default function NavBarBS() {
     setUser(userLocal);
   }, []);
 
-  const renderNavBar = () => {
+  const renderNavbar = () => {
     if (user.role === 'customer') {
       return (
         <>
@@ -65,7 +65,7 @@ export default function NavBarBS() {
 
   return (
     <Nav fill variant="tabs"className="products_page_navbar">
-      {renderNavBar()}
+      {renderNavbar()}
       <Nav.Item className="nav_item">
         {user.name}
       </Nav.Item>
