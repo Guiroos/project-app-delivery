@@ -5,8 +5,31 @@
 }
 
 body {
-  font-family: 'Courier New', Courier, monospace;
-  background-color: rgba(100, 21, 129, 0.568);
+  font-family: 'Fjalla One', sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+.products_page_navbar {
+  font-size: 1.3rem;
+  background-color: rgb(100, 21, 129);
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border: 0px;
+  height: auto;
+}
+
+.nav-link, .nav_item {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 20px 0px;
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login, .register{
@@ -43,4 +66,37 @@ body {
   font-size: 0.9em;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
+}
+
+.products_page_container{
+  margin-top: 100px;
+}
+
+.card_img {
+  width: 100%;
+}
+
+.card_img_overlay {
+  height: 10px;
+}
+
+.card-footer {
+  text-align: center;
+  margin: auto;
+}
+
+.card-footer Button {
+  width: 40px;
+  margin: 10px;
+  cursor: pointer;
+  display: flexbox;
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.input_quantity {
+  width: 50px;
+  text-align: center;
 }
