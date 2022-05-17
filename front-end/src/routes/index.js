@@ -9,6 +9,7 @@ import {
   Login,
   Register,
   Products,
+  Checkout,
 } from '../pages';
 
 export default function RoutesApp() {
@@ -20,6 +21,7 @@ export default function RoutesApp() {
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
           <Route path="/customer/products" element={ <Products /> } />
+          <Route path="/customer/checkout" element={ <Checkout /> } />
         </Routes>
       </BrowserRouter>
     </div>
