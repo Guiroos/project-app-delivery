@@ -8,6 +8,7 @@ export {
   removeFromLocalStorage,
 } from './localStorageAPI';
 export {
-  EMAIL_PATTERN,
   STATUS,
+  EMAIL_PATTERN,
+  validPrice,
 } from './constants';

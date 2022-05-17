@@ -1,5 +1,3 @@
-export const EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-
 export const STATUS = {
   OK: 200,
   CREATED: 201,
@@ -12,3 +10,7 @@ export const STATUS = {
   CONFLICT: 409,
   INTERNAL_SERVER_ERROR: 500,
 };
+
+export const EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+
+export const validPrice = (numberString) => numberString.replace('.', ',');

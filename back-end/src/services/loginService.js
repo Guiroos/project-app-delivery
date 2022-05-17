@@ -15,7 +15,9 @@ async function login(email, password) {
     email: user.email, name: user.name, role: user.role,
   });
 
-  return { ...user, token };
+  return {
+    email: user.email, name: user.name, role: user.role, token,
+  };
 }
 
 module.exports = { login };
