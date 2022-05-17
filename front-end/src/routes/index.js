@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import {
   Login,
-  Register
+  Register,
+  Products,
 } from '../pages';
 
 export default function RoutesApp() {
@@ -18,6 +19,7 @@ export default function RoutesApp() {
           <Route path="*" element={ <Navigate to="/login" replace /> } />
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
+          <Route path="/customer/products" element={ <Products /> } />
         </Routes>
       </BrowserRouter>
     </div>
