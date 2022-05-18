@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
 import { CheckoutForm, CheckoutProducts, Navbar } from "../components";
-import {
-  apiGet,
-  getItemLocalStorage,
-  validPrice,
-} from "../services";
+import { apiGet, getItemLocalStorage, validPrice } from "../services";
+import logo from "../images/doughnut_logo.png";
 
 export default function CheckoutClient() {
   const [cart, setCart] = useState([]);
@@ -33,28 +31,38 @@ export default function CheckoutClient() {
     asyncFunc();
   }, []);
 
-  return (
-    <main className="checkout_page">
-      <Navbar />
-      <Container fluid="md" className="checkout_table_container">
-      <h4>Finalizar Pedido</h4>
-      <div className="box">
-        <CheckoutProducts
-          cart={cart}
-          setCart={setCart}
-        />
-        <span className="table_total">{`Total: R$ ${validPrice(cartTotalPrice)}`}</span>
-      </div>
-      <h4>Endereço de Entrega</h4>
-      <div className="box">
-        <CheckoutForm
-          cart={cart}
-          totalPrice={cartTotalPrice}
-          sellers={sellers}
-        />
-      </div>
-      </Container>
+  const renderCheckout = () => {
+    if (isLoading) {
+      return (
+        <div className="loading">
+          <Image className="loading_image" src={logo} alt="" />
+        </div>
+      );
+    } else {
+      return (
+        <main className="checkout_page">
+          <Navbar />
+          <Container fluid="md" className="checkout_table_container">
+            <h4>Finalizar Pedido</h4>
+            <div className="box">
+              <CheckoutProducts cart={cart} setCart={setCart} />
+              <span className="table_total">{`Total: R$ ${validPrice(
+                cartTotalPrice
+              )}`}</span>
+            </div>
+            <h4>Endereço de Entrega</h4>
+            <div className="box">
+              <CheckoutForm
+                cart={cart}
+                totalPrice={cartTotalPrice}
+                sellers={sellers}
+              />
+            </div>
+          </Container>
+        </main>
+      );
+    }
+  };
 
-    </main>
-  );
+  return <>{renderCheckout()}</>;
 }
