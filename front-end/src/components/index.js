@@ -4,4 +4,6 @@ export { default as Navbar } from './Navbar';
 export { default as ProductCard } from './ProductCard';
 export { default as ProductCheckoutButton } from './ProductCheckoutButton';
 export { default as CheckoutProducts } from './CheckoutProducts'
+export { default as CheckoutForm } from './CheckoutForm';
+
 
