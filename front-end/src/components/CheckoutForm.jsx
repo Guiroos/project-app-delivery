@@ -22,14 +22,20 @@ export default function CheckoutForm({ cart, totalPrice, sellers }) {
   });
 
   const onSubmit = async (data) => {
-    const { token, email } = getItemLocalStorage('user');
-    const orderData = { order: { ...data, cart, email, orderPrice: totalPrice } };
+    const { token, email } = getItemLocalStorage("user");
+    const orderData = {
+      order: { ...data, cart, email, orderPrice: totalPrice },
+    };
     console.log(orderData);
     try {
-      const response = await apiPostOrder('/customer/checkout', orderData, token);
+      const response = await apiPostOrder(
+        "/customer/checkout",
+        orderData,
+        token
+      );
       if (response.status === STATUS.CREATED) {
         const idOrder = response.data.saleId;
-        removeFromLocalStorage('cart');
+        removeFromLocalStorage("cart");
         navigate(`/customer/orders/${idOrder}`);
       }
     } catch (error) {

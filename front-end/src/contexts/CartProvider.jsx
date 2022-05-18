@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
-import { getItemLocalStorage } from '../services';
+import PropTypes from "prop-types";
+import React, { createContext, useState } from "react";
+import { getItemLocalStorage } from "../services";
 
 export const CartContext = createContext({});
 
 export default function CartProvider({ children }) {
-  const cartLocalStorage = getItemLocalStorage('cart') ?? [];
+  const cartLocalStorage = getItemLocalStorage("cart") ?? [];
   const [products, setProducts] = useState(cartLocalStorage);
 
   function add({ id, price, name, quantity }) {
@@ -58,7 +58,7 @@ export default function CartProvider({ children }) {
   };
 
   return (
-    <CartContext.Provider value={ { products, manageCart } }>
+    <CartContext.Provider value={{ products, manageCart }}>
       {children}
     </CartContext.Provider>
   );

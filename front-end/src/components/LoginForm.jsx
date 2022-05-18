@@ -1,45 +1,46 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Form, Button } from "react-bootstrap";
 import {
   saveToLocalStorage,
   apiPostBody,
   EMAIL_PATTERN,
   STATUS,
-} from '../services';
+} from "../services";
 
 export default function LoginForm() {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
   const verifyRole = (role) => {
-    if (role === 'seller') {
-      return '/seller/orders';
-    } if (role === 'administrator') {
-      return '/admin/manage';
+    if (role === "seller") {
+      return "/seller/orders";
     }
-    return '/customer/products';
+    if (role === "administrator") {
+      return "/admin/manage";
+    }
+    return "/customer/products";
   };
 
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const sendData = await apiPostBody('/login', data);
+      const sendData = await apiPostBody("/login", data);
       if (sendData.status === STATUS.OK) {
-        saveToLocalStorage('user', sendData.data);
+        saveToLocalStorage("user", sendData.data);
         const path = verifyRole(sendData.data.role);
         navigate(path);
       } else {
@@ -58,54 +59,50 @@ export default function LoginForm() {
       <Form.Group controlId="email">
         <Form.Label>Email</Form.Label>
         <Form.Control
-        type="email"
-        name="email"
-        placeholder="email@site.com.br"
-        { ...register('email', {
-          required: true,
-          pattern: {
-            value: EMAIL_PATTERN,
-            message: 'Invalid email',
-          },
-        }) }
-      />
-    </Form.Group>
-    <Form.Group controlId="password">
-      <Form.Label>Password</Form.Label>
-      <Form.Control
-        type="password"
-        name="password"
-        placeholder="******"
-        { ...register('password', {
-          required: true,
-          minLength: {
-            value: 6,
-            message: 'Password must be at least 6 characters',
-          },
-        }) }
-      />
-    </Form.Group>
-    <Form.Group controlId="buttons">
-      <Button
-        type="submit"
-        variant="primary"
-        disabled={!isValid}
-      >
-        Entrar
-      </Button>
-      <Button
-        type="button"
-        variant="secondary"
-        onClick={() => navigate('/register')}
-      >
-        Ainda não tenho conta
-      </Button>
-    </Form.Group>
-    <Form.Group controlId="errors">
-      {errors.email && <p>{errors.email.message}</p>}
-      {errors.password && <p>{errors.password.message}</p>}
-      {errorMessage && <p>{errorMessage}</p>}
-    </Form.Group>
-    </Form >
+          type="email"
+          name="email"
+          placeholder="email@site.com.br"
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: EMAIL_PATTERN,
+              message: "Invalid email",
+            },
+          })}
+        />
+      </Form.Group>
+      <Form.Group controlId="password">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          name="password"
+          placeholder="******"
+          {...register("password", {
+            required: true,
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+          })}
+        />
+      </Form.Group>
+      <Form.Group controlId="buttons">
+        <Button type="submit" variant="primary" disabled={!isValid}>
+          Entrar
+        </Button>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => navigate("/register")}
+        >
+          Ainda não tenho conta
+        </Button>
+      </Form.Group>
+      <Form.Group controlId="errors">
+        {errors.email && <p>{errors.email.message}</p>}
+        {errors.password && <p>{errors.password.message}</p>}
+        {errorMessage && <p>{errorMessage}</p>}
+      </Form.Group>
+    </Form>
   );
 }

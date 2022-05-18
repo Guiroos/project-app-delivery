@@ -1,33 +1,38 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Form, Button } from 'react-bootstrap';
-import { STATUS, EMAIL_PATTERN, apiPostBody, saveToLocalStorage } from '../services';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Form, Button } from "react-bootstrap";
+import {
+  STATUS,
+  EMAIL_PATTERN,
+  apiPostBody,
+  saveToLocalStorage,
+} from "../services";
 
 export default function RegisterForm() {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
     },
   });
 
   const onSubmit = async (data) => {
     try {
-      const sendData = await apiPostBody('/register', data);
+      const sendData = await apiPostBody("/register", data);
       console.log(sendData);
       if (sendData.status === STATUS.CREATED) {
-        saveToLocalStorage('user', sendData.data);
-        navigate('/customer/products');
+        saveToLocalStorage("user", sendData.data);
+        navigate("/customer/products");
       }
     } catch (err) {
       console.log(err);
@@ -38,20 +43,20 @@ export default function RegisterForm() {
   };
 
   return (
-    <Form className="register_form" onSubmit={ handleSubmit(onSubmit) }>
+    <Form className="register_form" onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId="name">
         <Form.Label>Nome</Form.Label>
         <Form.Control
           type="name"
           name="name"
           placeholder="Seu nome"
-          { ...register('name', {
+          {...register("name", {
             required: true,
             minLength: {
               value: 12,
-              message: 'Name must be at least 12 characters',
+              message: "Name must be at least 12 characters",
             },
-          }) }
+          })}
         />
       </Form.Group>
 
@@ -61,13 +66,13 @@ export default function RegisterForm() {
           type="email"
           name="email"
           placeholder="seu-email@site.com.br"
-          { ...register('email', {
+          {...register("email", {
             required: true,
             pattern: {
               value: EMAIL_PATTERN,
-              message: 'Invalid email',
+              message: "Invalid email",
             },
-          }) }
+          })}
         />
       </Form.Group>
 
@@ -77,27 +82,21 @@ export default function RegisterForm() {
           type="password"
           name="password"
           placeholder="******"
-          { ...register('password', {
+          {...register("password", {
             required: true,
             minLength: {
               value: 6,
-              message: 'Password must be at least 6 characters',
+              message: "Password must be at least 6 characters",
             },
-          }) }
+          })}
         />
       </Form.Group>
 
       <Form.Group controlId="buttons">
-        <Button
-          variant="primary"
-          onClick={ () => navigate('/login') }
-        >
+        <Button variant="primary" onClick={() => navigate("/login")}>
           Voltar ↩️
         </Button>
-        <Button
-          type="submit"
-          disabled={ !isValid }
-        >
+        <Button type="submit" disabled={!isValid}>
           Cadastrar
         </Button>
       </Form.Group>
