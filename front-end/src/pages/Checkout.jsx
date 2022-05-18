@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
-import { CheckoutProducts, Navbar } from "../components";
+import Container from 'react-bootstrap/Container';
+import { CheckoutForm, CheckoutProducts, Navbar } from "../components";
 import {
   apiGet,
   getItemLocalStorage,
-  saveToLocalStorage,
   validPrice,
 } from "../services";
 
@@ -47,7 +45,16 @@ export default function CheckoutClient() {
         />
         <span className="table_total">{`Total: R$ ${validPrice(cartTotalPrice)}`}</span>
       </div>
+      <h4>Endereço de Entrega</h4>
+      <div className="box">
+        <CheckoutForm
+          cart={cart}
+          totalPrice={cartTotalPrice}
+          sellers={sellers}
+        />
+      </div>
       </Container>
+
     </main>
   );
 }
