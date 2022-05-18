@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { loginRoute, registerRoute, productRoute } = require('../routes');
+const {
+  loginRoute, registerRoute, productRoute, sellerRoute, customerRoute,
+} = require('../routes');
 
 const app = express();
 
@@ -14,5 +16,7 @@ app.use('/images', express.static('images'));
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/products', productRoute);
+app.use('/sellers', sellerRoute);
+app.use('/customer', customerRoute);
 
 module.exports = app;

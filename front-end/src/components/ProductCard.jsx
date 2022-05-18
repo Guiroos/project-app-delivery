@@ -1,28 +1,32 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import PropTypes from 'prop-types';
-import React, { useContext, useState, useEffect } from 'react';
-import { validPrice, saveToLocalStorage, getItemLocalStorage } from '../services';
-import { CartContext } from '../contexts';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import PropTypes from "prop-types";
+import React, { useContext, useState, useEffect } from "react";
+import {
+  validPrice,
+  saveToLocalStorage,
+  getItemLocalStorage,
+} from "../services";
+import { CartContext } from "../contexts";
 
 export default function ProductsCard({ id, name, price, urlImage }) {
   const { products, manageCart } = useContext(CartContext);
-  const localStorageQuantity = getItemLocalStorage('cart')
-    ?.find((e) => e.id === id)?.quantity ?? 0;
+  const localStorageQuantity =
+    getItemLocalStorage("cart")?.find((e) => e.id === id)?.quantity ?? 0;
   const [localQuantity, setLocalQuantity] = useState(localStorageQuantity);
 
   useEffect(() => {
-    if (!products.length) saveToLocalStorage('cart', []);
-    saveToLocalStorage('cart', products);
+    if (!products.length) saveToLocalStorage("cart", []);
+    saveToLocalStorage("cart", products);
   }, [manageCart.add, manageCart.remove, products, localQuantity]);
 
   const handleClick = (type) => {
-    if (type === 'add') {
+    if (type === "add") {
       const quantity = localQuantity + 1;
       setLocalQuantity(quantity);
       manageCart.add({ id: +id, price, name, quantity });
     }
-    if (type === 'remove') {
+    if (type === "remove") {
       const quantity = localQuantity <= 1 ? 0 : localQuantity - 1;
       setLocalQuantity(quantity);
       manageCart.remove({ id: +id, quantity });
@@ -35,34 +39,21 @@ export default function ProductsCard({ id, name, price, urlImage }) {
   };
 
   return (
-    <Card
-      className="bg-dark customer_products"
-    >
-      <Card.Img
-        className="card_img"
-        src={ urlImage }
-        alt={ name }
-
-      />
+    <Card className="bg-dark customer_products">
+      <Card.Img className="card_img" src={urlImage} alt={name} />
       <Card.ImgOverlay className="card_img_overlay">
-        <Card.Text
-          className="card__price"
-        >
+        <Card.Text className="card__price">
           {`R$ ${validPrice(price)}`}
         </Card.Text>
       </Card.ImgOverlay>
       <Card.Body className="card_body">
-        <Card.Title
-          className="card_name text-white"
-        >
-          {name}
-        </Card.Title>
+        <Card.Title className="card_name text-white">{name}</Card.Title>
       </Card.Body>
       <Card.Footer>
         <Button
           variant="success"
           type="submit"
-          onClick={ () => handleClick('remove') }
+          onClick={() => handleClick("remove")}
         >
           -
         </Button>
@@ -71,15 +62,15 @@ export default function ProductsCard({ id, name, price, urlImage }) {
           className="input_quantity"
           type="number"
           name="quantity"
-          min={ 0 }
-          value={ +localQuantity }
-          onChange={ (e) => handleChange(+e.target.value) }
+          min={0}
+          value={+localQuantity}
+          onChange={(e) => handleChange(+e.target.value)}
         />
 
         <Button
           variant="success"
           type="submit"
-          onClick={ () => handleClick('add') }
+          onClick={() => handleClick("add")}
         >
           +
         </Button>
