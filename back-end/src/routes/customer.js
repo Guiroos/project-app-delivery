@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { checkoutController } = require('../controllers');
+const { customerController } = require('../controllers');
 const { customerAuth } = require('../middlewares');
 
-router.post('/checkout', customerAuth, checkoutController);
+router.post('/checkout', customerAuth, customerController);
 
 module.exports = router;
