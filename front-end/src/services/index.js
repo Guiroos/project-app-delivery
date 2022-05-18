@@ -1,6 +1,7 @@
 export {
   apiGet,
   apiPostBody,
+  apiPostOrder,
 } from './requestAPI';
 export {
   saveToLocalStorage,

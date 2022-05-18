@@ -12,4 +12,11 @@ export const apiGet = async (url) => api.get(url);
 
 export const apiPostBody = async (url, body) => api.post(url, body);
 
+export const apiPostOrder = async (url, body, token) => api.post(url, body, {
+  headers: {
+    'content-type': 'application/json',
+    authorization: token,
+  },
+});
+
 export default api;
