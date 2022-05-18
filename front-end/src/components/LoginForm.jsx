@@ -36,7 +36,6 @@ export default function LoginForm() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       const sendData = await apiPostBody("/login", data);
       if (sendData.status === STATUS.OK) {

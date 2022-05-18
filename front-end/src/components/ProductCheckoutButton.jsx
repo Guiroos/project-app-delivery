@@ -22,7 +22,6 @@ export default function ProductCheckout() {
       const totalPrice = products
         .map((product) => +product.price * product.quantity)
         .reduce((acc, curr) => acc + curr, 0);
-      console.log("totalPrice", totalPrice);
       setCartPrice(totalPrice);
     };
     changePrice();

@@ -29,7 +29,6 @@ export default function RegisterForm() {
   const onSubmit = async (data) => {
     try {
       const sendData = await apiPostBody("/register", data);
-      console.log(sendData);
       if (sendData.status === STATUS.CREATED) {
         saveToLocalStorage("user", sendData.data);
         navigate("/customer/products");

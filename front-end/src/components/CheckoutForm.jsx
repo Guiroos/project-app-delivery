@@ -26,7 +26,6 @@ export default function CheckoutForm({ cart, totalPrice, sellers }) {
     const orderData = {
       order: { ...data, cart, email, orderPrice: totalPrice },
     };
-    console.log(orderData);
     try {
       const response = await apiPostOrder(
         "/customer/checkout",
