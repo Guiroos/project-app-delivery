@@ -1,45 +1,59 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import { getItemLocalStorage, saveToLocalStorage, validPrice } from '../services';
 
-import { getItemLocalStorage, validPrice } from '../services';
+export default function CheckoutProducts({ cart, setCart, }) {
 
-export default function CheckoutProducts({
-  index,
-  id,
-  name,
-  quantity,
-  price,
-  setCart,
-}) {
-  const totalPrice = (quantity * price).toFixed(2);
-  const productIndex = index + 1;
-
-  const handleClick = () => {
-    const newCheckoutCart = getItemLocalStorage('cart');
-    const filteredCheckoutCard = newCheckoutCart.filter((e) => e.id !== id);
-    setCart(filteredCheckoutCard);
+  const handleClick = (e, item) => {
+    const cartStorage = getItemLocalStorage("cart");
+    const filteredMap = cartStorage.filter((iCart) => iCart.id !== item.id);
+    setCart(filteredMap);
+    saveToLocalStorage("cart", filteredMap);
   };
 
+  const renderItemsTable = () => {
+    return cart.map((item,index) => {
+      const totalPrice = (item.quantity * item.price).toFixed(2);
+      return (
+        <tr key={index}>
+          <td className="table_row_id">{index + 1 }</td>
+          <td className="table_row_name">{item.name}</td>
+          <td className="table_row_quantity">{item.quantity}</td>
+          <td className="table_row_price">{`R$ ${validPrice(item.price)}`}</td>
+          <td className="table_row_total">{`R$ ${validPrice(totalPrice)}`}</td>
+          <td className="table_row_button" value={item.id} onClick={ (e) => handleClick(e, item) }>Remover</td>
+        </tr>
+      )
+    })
+  }
+
   return (
-    <tr>
-      <td className="table_row_id">{productIndex}</td>
-      <td className="table_row_name">{name}</td>
-      <td className="table_row_quantity">{quantity}</td>
-      <td className="table_row_price">{`R$ ${validPrice(price)}`}</td>
-      <td className="table_row_total">{`R$ ${validPrice(totalPrice)}`}</td>
-      <td className="table_row_button"><Button onClick={ handleClick }>Remover</Button></td>
-    </tr>
+    <Table className="checkout_page_table" bordered>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Descrição</th>
+          <th>Quantidade</th>
+          <th>Valor Unitário</th>
+          <th>Sub-Total</th>
+          <th>Remover Item</th>
+        </tr>
+      </thead>
+      <tbody>
+        {renderItemsTable()}
+      </tbody>
+    </Table>
   );
 }
 
 CheckoutProducts.propTypes = {
-  index: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  quantity: PropTypes.number.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
+  })).isRequired,
   setCart: PropTypes.func.isRequired,
 };
+

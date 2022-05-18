@@ -38,34 +38,15 @@ export default function CheckoutClient() {
   return (
     <main className="checkout_page">
       <Navbar />
-      <Container fluid className="checkout_table_container">
-      <h2>Finalizar Pedido</h2>
-        <Table className="checkout_page_table" bordered>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Produto</th>
-              <th>Quantidade</th>
-              <th>Preço</th>
-              <th>Total</th>
-              <th>Remover</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart.map((item, index) => (
-              <CheckoutProducts
-                key={index}
-                index={index}
-                id={item.id}
-                name={item.name}
-                price={item.price}
-                quantity={item.quantity}
-                setCart={setCart}
-              />
-            ))}
-          </tbody>
-        </Table>
-      <h2>{`Total: R$ ${validPrice(cartTotalPrice)}`}</h2>
+      <Container fluid="md" className="checkout_table_container">
+      <h4>Finalizar Pedido</h4>
+      <div className="box">
+        <CheckoutProducts
+          cart={cart}
+          setCart={setCart}
+        />
+        <span className="table_total">{`Total: R$ ${validPrice(cartTotalPrice)}`}</span>
+      </div>
       </Container>
     </main>
   );
