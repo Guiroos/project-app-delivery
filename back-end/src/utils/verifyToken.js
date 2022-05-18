@@ -5,8 +5,7 @@ const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8');
 
 const verifyToken = (token) => {
   try {
-    const verify = jwt.verify(token, SECRET);
-    return verify;
+    return jwt.verify(token, SECRET);
   } catch (_error) {
     return null;
   }

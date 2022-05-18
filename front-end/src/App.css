@@ -223,11 +223,6 @@ body {
   color: rgb(255, 255, 255);
 }
 
-.checkout_page_table tr td:nth-child(5){
-  background-color: rgb(6, 18, 87);
-  color: rgb(255, 255, 255);
-}
-
 .checkout_page_table tr td:nth-child(6) {
   background-color: rgb(190, 6, 77);
   color: white;

@@ -5,7 +5,7 @@ import { CheckoutForm, CheckoutProducts, Navbar } from "../components";
 import { apiGet, getItemLocalStorage, validPrice } from "../services";
 import logo from "../images/doughnut_logo.png";
 
-export default function CheckoutClient() {
+export default function Checkout() {
   const [cart, setCart] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sellers, setSellers] = useState([]);

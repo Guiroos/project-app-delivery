@@ -8,7 +8,7 @@ import {
 } from "../services";
 
 export default function CheckoutProducts({ cart, setCart }) {
-  const handleClick = (e, item) => {
+  const handleClick = (_e, item) => {
     const cartStorage = getItemLocalStorage("cart");
     const filteredMap = cartStorage.filter((iCart) => iCart.id !== item.id);
     setCart(filteredMap);
