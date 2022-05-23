@@ -24,7 +24,7 @@ export const changeStatusColor = (status) => {
   if (status === 'Preparando') {
     return '#4CAF55';
   }
-  if (status === 'Em trânsito') {
+  if (status === 'Em Trânsito') {
     return '#CC6C6C';
   }
   if (status === 'Entregue') {
