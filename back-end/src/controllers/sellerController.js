@@ -6,4 +6,17 @@ async function getAllSellers(_req, res) {
   return res.status(status.OK).json(response);
 }
 
-module.exports = { getAllSellers };
+async function getOrdersBySeller(req, res) {
+  const { email } = req.params;
+  const response = await sellerService.getOrdersBySeller(email);
+  return res.status(status.OK).json(response);
+}
+
+async function updateStatus(req, res) {
+  const { id } = req.params;
+  const { newStatus } = req.body;
+  const response = await sellerService.updateStatus(id, newStatus);
+  return res.status(status.OK).json(response);
+}
+
+module.exports = { getAllSellers, getOrdersBySeller, updateStatus };
