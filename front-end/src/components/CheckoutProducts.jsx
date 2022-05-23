@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-import Table from "react-bootstrap/Table";
 import {
   getItemLocalStorage,
   saveToLocalStorage,
   validPrice,
 } from "../services";
+import Table from "react-bootstrap/Table";
 
 export default function CheckoutProducts({ cart, setCart }) {
   const handleClick = (_e, item) => {

@@ -6,10 +6,16 @@ async function getSales(_req, res) {
   return res.status(status.OK).json(response);
 }
 
+async function getSalesByUserEmail(req, res) {
+  const { email } = req.params;
+  const response = await saleService.getSalesByUserEmail(email);
+  return res.status(status.OK).json(response);
+}
+
 async function getSalesProductById(req, res) {
   const { id } = req.params;
   const response = await saleService.getSalesProductById(id);
   return res.status(status.OK).json(response);
 }
 
-module.exports = { getSales, getSalesProductById };
+module.exports = { getSales, getSalesByUserEmail, getSalesProductById };

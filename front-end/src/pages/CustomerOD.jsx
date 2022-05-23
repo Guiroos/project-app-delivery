@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { Navbar, OrderDetails } from "../components";
 import { apiGet, validPrice, changeStatusColor } from "../services";
-import { useParams } from "react-router";
 import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import logo from "../images/doughnut_logo.png";
 
 export default function CustomerOD() {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -14,7 +16,7 @@ export default function CustomerOD() {
     const asyncFunc = async () => {
       try {
         setIsLoading(true);
-        const details = await apiGet(`sale/orders/${id}`);
+        const details = await apiGet(`sale/orders/id/${id}`);
         setOrderDetails(details.data);
         setStatusColor(changeStatusColor(details.data.status));
         setIsLoading(false);
@@ -23,30 +25,35 @@ export default function CustomerOD() {
       }
     };
     asyncFunc();
-  }, []);
+  }, [id]);
 
   const renderOrderDetails = () => {
     if (isLoading) {
-      return <div>Loading...</div>;
+      return (
+        <div className="loading">
+          <Image className="loading_image" src={logo} alt="" />
+        </div>
+      );
+    } else {
+      return (
+        <main className="customer_order_details animate-bottom">
+          <Navbar />
+          <Container>
+            <h4>Detalhes do Pedido</h4>
+            <div className="box">
+              <OrderDetails
+                orderDetails={orderDetails}
+                id={id}
+                statusColor={statusColor}
+              />
+              <span className="table_total">{`Total: R$ ${validPrice(
+                orderDetails.totalPrice
+              )}`}</span>
+            </div>
+          </Container>
+        </main>
+      );
     }
-    return (
-      <main>
-        <Navbar />
-        <Container>
-          <h4>Detalhes do Pedido</h4>
-          <div className="box">
-            <OrderDetails
-              orderDetails={orderDetails}
-              id={id}
-              statusColor={statusColor}
-            />
-            <span className="table_total">{`Total: R$ ${validPrice(
-              orderDetails.totalPrice
-            )}`}</span>
-          </div>
-        </Container>
-      </main>
-    );
   };
 
   return <>{renderOrderDetails()}</>;

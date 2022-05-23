@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, ProductCard, ProductCheckoutButton } from "../components";
 import { CartProvider } from "../contexts";
+import { Navbar, ProductCard, ProductCheckoutButton } from "../components";
 import { apiGet } from "../services";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
-import { Image } from "react-bootstrap";
 
 export default function Products() {
   const [products, setProducts] = useState([]);

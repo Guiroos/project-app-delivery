@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Nav from "react-bootstrap/Nav";
-import { getItemLocalStorage, removeFromLocalStorage } from "../services";
 import { useNavigate } from "react-router-dom";
+import { getItemLocalStorage, removeFromLocalStorage } from "../services";
+import Nav from "react-bootstrap/Nav";
 
 export default function Navbar() {
   const [user, setUser] = useState("");

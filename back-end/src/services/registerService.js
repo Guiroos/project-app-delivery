@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const { status } = require('../utils');
+const { status, jwt } = require('../utils');
 
 async function register(name, email, password, role) {
   const userCheck = await User.findOne({ where: { name, email } });
@@ -12,7 +12,15 @@ async function register(name, email, password, role) {
     name, email, password, role,
   });
 
-  return { status: status.CREATED, message: userCreated };
+  const token = jwt.generateToken({
+    email: userCreated.email, name: userCreated.name, role: userCreated.role,
+  });
+
+  const user = {
+    name: userCreated.name, email: userCreated.email, role: userCreated.role, token,
+  };
+
+  return { status: status.CREATED, user };
 }
 
 module.exports = { register };
