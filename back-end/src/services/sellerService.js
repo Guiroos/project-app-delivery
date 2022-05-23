@@ -11,20 +11,18 @@ function getAllSellers() {
 
 async function getOrdersBySeller(email) {
   const seller = await User.findOne({ where: { email } });
-  const response = await Sale.findAll({
+  return Sale.findAll({
     where: {
       sellerId: seller.id,
     },
   });
-  return response;
 }
 
 async function updateStatus(id, newStatus) {
-  const response = await Sale.update(
+  return Sale.update(
     { status: newStatus },
     { where: { id } },
   );
-  return response;
 }
 
 module.exports = { getAllSellers, getOrdersBySeller, updateStatus };
