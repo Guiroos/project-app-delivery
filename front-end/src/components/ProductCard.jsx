@@ -49,7 +49,7 @@ export default function ProductsCard({ id, name, price, urlImage }) {
       <Card.Body className="card_body">
         <Card.Title className="card_name text-white">{name}</Card.Title>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="card_footer">
         <Button
           variant="success"
           type="submit"
