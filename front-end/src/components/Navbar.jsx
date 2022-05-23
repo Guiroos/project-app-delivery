@@ -23,20 +23,10 @@ export default function Navbar() {
       return (
         <>
           <Nav.Item>
-            <Nav.Link
-              data-testid="customer_products__element-navbar-link-products"
-              href="/customer/products"
-            >
-              PRODUTOS
-            </Nav.Link>
+            <Nav.Link onClick={() => navigate("/customer/products")}>PRODUTOS</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link
-              data-testid="customer_products__element-navbar-link-orders"
-              href="/customer/orders"
-            >
-              MEUS PEDIDOS
-            </Nav.Link>
+            <Nav.Link onClick={() => navigate("/customer/orders")}>MEUS PEDIDOS</Nav.Link>
           </Nav.Item>
         </>
       );
@@ -44,23 +34,13 @@ export default function Navbar() {
     if (user.role === "seller") {
       return (
         <Nav.Item>
-          <Nav.Link
-            data-testid="customer_products__element-navbar-link-orders"
-            href="/seller/orders"
-          >
-            PEDIDOS
-          </Nav.Link>
+          <Nav.Link onClick={() => navigate("/seller/orders")}>PEDIDOS</Nav.Link>
         </Nav.Item>
       );
     }
     return (
       <Nav.Item>
-        <Nav.Link
-          data-testid="customer_products__element-navbar-link-orders"
-          href="/admin/manage"
-        >
-          GERENCIAR USUÁRIOS
-        </Nav.Link>
+        <Nav.Link href="/admin/manage">GERENCIAR USUÁRIOS</Nav.Link>
       </Nav.Item>
     );
   };
