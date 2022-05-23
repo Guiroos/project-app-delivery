@@ -12,4 +12,6 @@ export {
   STATUS,
   EMAIL_PATTERN,
   validPrice,
+  formatDate,
+  changeStatusColor,
 } from './constants';
