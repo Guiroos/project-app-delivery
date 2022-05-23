@@ -10,6 +10,7 @@ import {
   Register,
   Products,
   Checkout,
+  CustomerOrders,
   CustomerOD,
 } from '../pages';
 
@@ -23,6 +24,7 @@ export default function RoutesApp() {
           <Route path="/register" element={ <Register /> } />
           <Route path="/customer/products" element={ <Products /> } />
           <Route path="/customer/checkout" element={ <Checkout /> } />
+          <Route path="/customer/orders" element={ <CustomerOrders /> } />
           <Route path="/customer/orders/:id" element={ <CustomerOD /> } />
         </Routes>
       </BrowserRouter>
