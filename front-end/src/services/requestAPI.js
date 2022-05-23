@@ -19,4 +19,6 @@ export const apiPostOrder = async (url, body, token) => api.post(url, body, {
   },
 });
 
+export const apiPut = async (url, body) => api.put(url, body);
+
 export default api;
