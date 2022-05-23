@@ -7,6 +7,11 @@
 body {
   font-family: 'Fjalla One', sans-serif;
   background-color: rgb(255, 255, 255);
+  font-size: x-large;
+}
+
+main {
+  margin-top: 100px;
 }
 
 .loading {
@@ -228,10 +233,6 @@ body {
   color: white;
 }
 
-/* .checkout_page_table tr td:nth-child(6):hover {
-  cursor: pointer;
-} */
-
 .table_total {
   float: right;
   color: white;
@@ -241,4 +242,26 @@ body {
   padding: 8px;
   border: 2px solid black;
   border-radius: 5px;
+}
+
+.od_container {
+  background-color: rgb(218, 218, 218);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.od_container div{
+  justify-content: center;
+  display: flex;
+}
+
+.od_container div:nth-child(3){
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+}
+
+.od_container div:nth-child(4){
+  border-radius: 10px;
+  font-weight: bolder;
 }
