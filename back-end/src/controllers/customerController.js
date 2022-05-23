@@ -1,9 +1,9 @@
-const { checkoutService } = require('../services');
+const { customerService } = require('../services');
 const { status } = require('../utils');
 
 async function checkout(req, res) {
   const { order } = req.body;
-  const response = await checkoutService.checkout({
+  const response = await customerService.checkout({
     ...order,
     orderPrice: Number(order.orderPrice),
   });

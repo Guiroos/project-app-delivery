@@ -23,13 +23,11 @@ async function getSalesProductById(id) {
   }));
 
   return {
-    data: {
-      sellerName: seller.name,
-      saleDate: sale.saleDate,
-      status: sale.status,
-      totalPrice: sale.totalPrice,
-      orderProducts: products,
-    },
+    sellerName: seller.name,
+    saleDate: sale.saleDate,
+    status: sale.status,
+    totalPrice: sale.totalPrice,
+    orderProducts: products,
   };
 }
 
