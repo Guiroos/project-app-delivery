@@ -10,21 +10,35 @@ import logo from "../images/doughnut_logo.png";
 export default function CustomerOrders() {
   const [isLoading, setIsLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState([]);
+  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
+    setUserRole(getItemLocalStorage("user").role);
     const asyncFunc = async () => {
-      try {
-        setIsLoading(true);
-        const { email } = getItemLocalStorage("user");
-        const response = await apiGet(`/sale/orders/email/${email}`);
-        setOrderDetails(response.data);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
+      if (userRole === "customer") {
+        try {
+          setIsLoading(true);
+          const { email } = getItemLocalStorage("user");
+          const response = await apiGet(`/sale/orders/email/${email}`);
+          setOrderDetails(response.data);
+          setIsLoading(false);
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        try {
+          setIsLoading(true);
+          const { email } = getItemLocalStorage("user");
+          const response = await apiGet(`/sellers/orders/email/${email}`);
+          setOrderDetails(response.data);
+          setIsLoading(false);
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
     asyncFunc();
-  }, []);
+  }, [userRole]);
 
   const renderOrders = () => {
     if (isLoading) {
@@ -44,6 +58,7 @@ export default function CustomerOrders() {
                   <OrderCards
                     order={order}
                     index={index}
+                    userRole={userRole}
                     statusColor={changeStatusColor(order.status)}
                   />
                 </Col>
@@ -55,5 +70,5 @@ export default function CustomerOrders() {
     }
   };
 
-  return renderOrders();
+  return <>{renderOrders()}</>;
 }
