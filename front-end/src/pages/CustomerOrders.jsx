@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
 import { Navbar, OrderCards } from "../components";
 import { apiGet, changeStatusColor, getItemLocalStorage } from "../services";
-import { Image } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function CustomerOrders() {

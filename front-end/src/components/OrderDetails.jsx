@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import React from "react";
-import Table from "react-bootstrap/Table";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 import { formatDate, validPrice } from "../services";
-import { Button, Row } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Table from "react-bootstrap/Table";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 export default function OrderDetails({ orderDetails, id, statusColor }) {
-
   const renderItemsTable = () => {
     return orderDetails.orderProducts.map((item, index) => {
       const totalPrice = (item.quantity * item.price).toFixed(2);
@@ -33,7 +33,11 @@ export default function OrderDetails({ orderDetails, id, statusColor }) {
           <Col style={{ backgroundColor: statusColor }}>
             {orderDetails.status}
           </Col>
-          <Col md="auto"><Button disabled={orderDetails.status !== "Em trânsito"}>MARCAR COMO ENTREGUE</Button></Col>
+          <Col md="auto">
+            <Button disabled={orderDetails.status !== "Em trânsito"}>
+              MARCAR COMO ENTREGUE
+            </Button>
+          </Col>
         </Row>
       </Container>
       <Table className="checkout_page_table" bordered>

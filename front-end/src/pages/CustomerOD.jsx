@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { Navbar, OrderDetails } from "../components";
 import { apiGet, validPrice, changeStatusColor } from "../services";
-import { useParams } from "react-router";
 import Container from "react-bootstrap/Container";
-import { Image } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function CustomerOD() {

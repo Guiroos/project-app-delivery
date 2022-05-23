@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Form, Button } from "react-bootstrap";
 import {
   STATUS,
   EMAIL_PATTERN,
   apiPostBody,
   saveToLocalStorage,
 } from "../services";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export default function RegisterForm() {
   const [errorMessage, setErrorMessage] = useState("");

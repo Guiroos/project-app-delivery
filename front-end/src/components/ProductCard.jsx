@@ -1,13 +1,13 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import PropTypes from "prop-types";
 import React, { useContext, useState, useEffect } from "react";
+import { CartContext } from "../contexts";
 import {
   validPrice,
   saveToLocalStorage,
   getItemLocalStorage,
 } from "../services";
-import { CartContext } from "../contexts";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 export default function ProductsCard({ id, name, price, urlImage }) {
   const { products, manageCart } = useContext(CartContext);
