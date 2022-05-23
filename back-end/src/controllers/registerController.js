@@ -8,7 +8,7 @@ async function register(req, res) {
 
   const userCreated = await registerService.register(name, email, hashPassword, role);
 
-  return res.status(userCreated.status).json(userCreated.message);
+  return res.status(userCreated.status).json(userCreated.user);
 }
 
 module.exports = { register };
