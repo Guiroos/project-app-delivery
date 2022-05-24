@@ -9,7 +9,7 @@ async function register(req, res) {
 
   const userCreated = await adminService.register(name, email, hashPassword, role);
 
-  return res.status(userCreated.status);
+  return res.status(userCreated.status).json(userCreated.message);
 }
 
 module.exports = { register };
