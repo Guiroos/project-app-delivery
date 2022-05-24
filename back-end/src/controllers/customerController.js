@@ -14,4 +14,4 @@ async function checkout(req, res) {
   return res.status(status.CREATED).json(response);
 }
 
-module.exports = checkout;
+module.exports = { checkout };
