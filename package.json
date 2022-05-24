@@ -2,10 +2,10 @@
   "name": "project-app-delivery",
   "version": "1.0.0",
   "description": "",
-  "main": "/back-end/src/server.js",
+  "main": "./back-end/src/api/server.js",
   "scripts": {
     "install": "cd back-end && npm install",
-    "start": "/back-end/src/server.js"
+    "start": "cd back-end && npm run start"
   },
   "repository": {
     "type": "git",
