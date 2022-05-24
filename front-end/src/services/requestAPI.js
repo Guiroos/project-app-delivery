@@ -12,7 +12,7 @@ export const apiGet = async (url) => api.get(url);
 
 export const apiPostBody = async (url, body) => api.post(url, body);
 
-export const apiPostOrder = async (url, body, token) => api.post(url, body, {
+export const apiPostToken = async (url, body, token) => api.post(url, body, {
   headers: {
     'content-type': 'application/json',
     authorization: token,
@@ -20,5 +20,7 @@ export const apiPostOrder = async (url, body, token) => api.post(url, body, {
 });
 
 export const apiPut = async (url, body) => api.put(url, body);
+
+export const apiDelete = async (url) => api.delete(url);
 
 export default api;

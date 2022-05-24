@@ -12,6 +12,7 @@ import {
   Checkout,
   Orders,
   OrdersDetails,
+  Admin,
 } from '../pages';
 
 export default function RoutesApp() {
@@ -28,6 +29,7 @@ export default function RoutesApp() {
           <Route path="/customer/orders/:id" element={ <OrdersDetails /> } />
           <Route path="/seller/orders" element={ <Orders /> } />
           <Route path="/seller/orders/:id" element={ <OrdersDetails /> } />
+          <Route path="/admin/manage" element={ <Admin /> } />
         </Routes>
       </BrowserRouter>
     </div>

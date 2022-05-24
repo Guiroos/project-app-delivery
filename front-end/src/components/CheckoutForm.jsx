@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
-  apiPostOrder,
+  apiPostToken,
   getItemLocalStorage,
   STATUS,
   removeFromLocalStorage,
@@ -27,7 +27,7 @@ export default function CheckoutForm({ cart, totalPrice, sellers }) {
       order: { ...data, cart, email, orderPrice: totalPrice },
     };
     try {
-      const response = await apiPostOrder(
+      const response = await apiPostToken(
         "/customer/checkout",
         orderData,
         token

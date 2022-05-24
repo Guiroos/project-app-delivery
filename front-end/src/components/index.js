@@ -7,5 +7,7 @@ export { default as CheckoutProducts } from './CheckoutProducts'
 export { default as CheckoutForm } from './CheckoutForm';
 export { default as OrderCards } from './OrderCards';
 export { default as OrderDetails } from './OrderDetails';
+export { default as AdminRegisterForm } from './AdminRegisterForm';
+export { default as AdminUsersList } from './AdminUsersList';
 
 
