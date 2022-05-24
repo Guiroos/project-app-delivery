@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
-export default function CustomerOrders() {
+export default function Orders() {
   const [isLoading, setIsLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState([]);
   const [userRole, setUserRole] = useState("");
