@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Navbar, OrderDetails } from "../components";
-import { apiGet, validPrice, changeStatusColor } from "../services";
+import {
+  apiGet,
+  validPrice,
+  changeStatusColor,
+  getItemLocalStorage,
+} from "../services";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
-export default function CustomerOD() {
+export default function OrdersDetails() {
   const [orderDetails, setOrderDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [statusColor, setStatusColor] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [buttonClicked, setButtonClicked] = useState(false);
   const { id } = useParams();
 
+  const changeButton = () => {
+    setButtonClicked(!buttonClicked);
+  };
+
   useEffect(() => {
+    setUserRole(getItemLocalStorage("user").role);
     const asyncFunc = async () => {
       try {
         setIsLoading(true);
@@ -25,7 +37,7 @@ export default function CustomerOD() {
       }
     };
     asyncFunc();
-  }, [id]);
+  }, [id, buttonClicked]);
 
   const renderOrderDetails = () => {
     if (isLoading) {
@@ -45,6 +57,8 @@ export default function CustomerOD() {
                 orderDetails={orderDetails}
                 id={id}
                 statusColor={statusColor}
+                userRole={userRole}
+                changeButton={changeButton}
               />
               <span className="table_total">{`Total: R$ ${validPrice(
                 orderDetails.totalPrice
