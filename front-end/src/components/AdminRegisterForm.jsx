@@ -104,6 +104,7 @@ export default function AdminRegisterForm({ changeButton }) {
       <Form.Group controlId="formBasicButton">
         <Button type="submit" disabled={!isValid}>Cadastrar</Button>
       </Form.Group>
+      {errorRegister && <p>Erro ao cadastrar usuário</p>}
     </Form>
   );
 }
