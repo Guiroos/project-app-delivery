@@ -51,7 +51,7 @@ export default function OrderDetails({
               <Button
                 value="Entregue"
                 onClick={(e) => handleClick(e.target.value)}
-                disabled={orderDetails.status !== "Em trânsito"}
+                disabled={orderDetails.status !== "Em Trânsito"}
               >
                 MARCAR COMO ENTREGUE
               </Button>

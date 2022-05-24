@@ -25,7 +25,7 @@ export default function CustomerOrders() {
         } catch (err) {
           console.log(err);
         }
-      } else {
+      } else if(userRole === "seller") {
         try {
           setIsLoading(true);
           const { email } = getItemLocalStorage("user");
@@ -54,7 +54,7 @@ export default function CustomerOrders() {
           <Container className="orders_page_container" fluid="md">
             <Row xs={2} md={4} className="g-4 orders_page_container_cards">
               {orderDetails.map((order, index) => (
-                <Col key={order.id}>
+                <Col key={index}>
                   <OrderCards
                     order={order}
                     index={index}
