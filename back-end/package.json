@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "start": "node .",
+    "postinstall": "npm run db:reset",
     "dev": "nodemon .",
     "test": "jest",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
