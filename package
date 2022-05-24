@@ -1,0 +1,27 @@
+{
+  "name": "project-app-delivery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/back-end/src/server.js",
+  "scripts": {
+    "install": "cd back-end && npm install",
+    "start": "/back-end/src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guiroos/project-app-delivery.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "backend",
+    "api",
+    "delivery"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Guiroos/project-app-delivery/issues"
+  },
+  "homepage": "https://github.com/Guiroos/project-app-delivery#readme"
+}
