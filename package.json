@@ -4,7 +4,7 @@
   "description": "",
   "main": "./back-end/src/api/server.js",
   "scripts": {
-    "install": "cd back-end && npm install",
+    "install": "cd back-end && npm install && npm run db:reset",
     "start": "cd back-end && npm run start"
   },
   "repository": {
