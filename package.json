@@ -1,27 +1,36 @@
 {
   "name": "project-app-delivery",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a project that integrates the frontend with backend, producing a beverage delivery application.",
   "main": "./back-end/src/api/server.js",
+  "license": "ISC",
+  "author": {
+    "name": "Guilherme Roos",
+    "email": "guilherme.roosr@gmail.com",
+    "url": "https://www.linkedin.com/in/guilhermeroos/"
+  },
   "scripts": {
-    "install": "cd back-end && npm install && npm run db:reset",
+    "install": "sh ./scripts/install.sh",
     "start": "cd back-end && npm run start"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Guiroos/project-app-delivery.git"
   },
-  "keywords": [
-    "express",
-    "node",
-    "backend",
-    "api",
-    "delivery"
-  ],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Guiroos/project-app-delivery/issues"
   },
-  "homepage": "https://github.com/Guiroos/project-app-delivery#readme"
+  "homepage": "https://github.com/Guiroos/project-app-delivery#readme",
+  "keywords": [
+    "backend",
+    "frontend",
+    "node",
+    "sequelize",
+    "express",
+    "react",
+    "bootstrap",
+    "axios",
+    "api",
+    "delivery"
+  ]
 }
