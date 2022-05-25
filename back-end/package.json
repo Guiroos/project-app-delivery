@@ -1,7 +1,6 @@
 {
   "name": "project-app-delivery-back-end",
   "version": "1.0.0",
-  "description": "Back-end do projeto App de Delivery",
   "main": "./src/api/server.js",
   "engines": {
     "node": ">=16.0.0"
@@ -10,14 +9,10 @@
   "private": true,
   "scripts": {
     "start": "node .",
-    "postinstall": "npm run db:reset",
     "dev": "nodemon .",
     "test": "jest",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
