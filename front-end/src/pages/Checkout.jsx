@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Image from "react-bootstrap/Image";
 import { CheckoutForm, CheckoutProducts, Navbar } from "../components";
 import { apiGet, getItemLocalStorage, validPrice } from "../services";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function Checkout() {

@@ -1,12 +1,23 @@
 import PropTypes from "prop-types";
 import React from "react";
-import Table from "react-bootstrap/Table";
-import Col from "react-bootstrap/Col";
+import { apiPut, formatDate, validPrice } from "../services";
 import Container from "react-bootstrap/Container";
-import { formatDate, validPrice } from "../services";
-import { Button, Row } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
-export default function OrderDetails({ orderDetails, id, statusColor }) {
+export default function OrderDetails({
+  orderDetails,
+  id,
+  statusColor,
+  userRole,
+  changeButton,
+}) {
+  const handleClick = async (value) => {
+    await apiPut(`sellers/status/id/${id}`, { newStatus: value });
+    changeButton();
+  };
 
   const renderItemsTable = () => {
     return orderDetails.orderProducts.map((item, index) => {
@@ -28,12 +39,46 @@ export default function OrderDetails({ orderDetails, id, statusColor }) {
       <Container className="od_container">
         <Row>
           <Col>{`PEDIDO ${id}`}</Col>
-          <Col md="auto">{`VENDEDOR: ${orderDetails.sellerName}`}</Col>
+          {userRole === "customer" && (
+            <Col md="auto">{`VENDEDOR: ${orderDetails.sellerName}`}</Col>
+          )}
           <Col>{formatDate(orderDetails.saleDate)}</Col>
           <Col style={{ backgroundColor: statusColor }}>
             {orderDetails.status}
           </Col>
-          <Col md="auto"><Button disabled={orderDetails.status !== "Em trânsito"}>MARCAR COMO ENTREGUE</Button></Col>
+          {userRole === "customer" && (
+            <Col md="auto">
+              <Button
+                value="Entregue"
+                onClick={(e) => handleClick(e.target.value)}
+                disabled={orderDetails.status !== "Em Trânsito"}
+              >
+                MARCAR COMO ENTREGUE
+              </Button>
+            </Col>
+          )}
+          {userRole === "seller" && (
+            <>
+              <Col md="auto">
+                <Button
+                  value="Preparando"
+                  onClick={(e) => handleClick(e.target.value)}
+                  disabled={orderDetails.status !== "Pendente"}
+                >
+                  PREPARANDO PEDIDO
+                </Button>
+              </Col>
+              <Col md="auto">
+                <Button
+                  value="Em Trânsito"
+                  onClick={(e) => handleClick(e.target.value)}
+                  disabled={orderDetails.status !== "Preparando"}
+                >
+                  SAIU PARA ENTREGA
+                </Button>
+              </Col>
+            </>
+          )}
         </Row>
       </Container>
       <Table className="checkout_page_table" bordered>
@@ -53,5 +98,9 @@ export default function OrderDetails({ orderDetails, id, statusColor }) {
 }
 
 OrderDetails.propTypes = {
+  id: PropTypes.string.isRequired,
   orderDetails: PropTypes.object.isRequired,
+  statusColor: PropTypes.string.isRequired,
+  userRole: PropTypes.string.isRequired,
+  changeButton: PropTypes.func.isRequired,
 };

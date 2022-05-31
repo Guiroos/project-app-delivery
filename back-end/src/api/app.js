@@ -2,7 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const {
-  loginRoute, registerRoute, productRoute, sellerRoute, customerRoute, saleRoute,
+  loginRoute,
+  registerRoute,
+  productRoute,
+  sellerRoute,
+  customerRoute,
+  saleRoute,
+  adminRoute,
+  userRoute,
 } = require('../routes');
 
 const app = express();
@@ -19,5 +26,7 @@ app.use('/products', productRoute);
 app.use('/sellers', sellerRoute);
 app.use('/customer', customerRoute);
 app.use('/sale', saleRoute);
+app.use('/admin', adminRoute);
+app.use('/user', userRoute);
 
 module.exports = app;

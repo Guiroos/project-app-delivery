@@ -139,12 +139,12 @@ main {
   height: 50px;
 }
 
-.card-footer {
+.card_footer {
   text-align: center;
   margin: auto;
 }
 
-.card-footer Button {
+.card_footer Button {
   width: 40px;
   margin: 10px;
   cursor: pointer;
@@ -264,4 +264,20 @@ main {
 .od_container div:nth-child(4){
   border-radius: 10px;
   font-weight: bolder;
+}
+
+.orders_card {
+  display: flexbox;
+  margin: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.orders_card div {
+  text-align: center;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

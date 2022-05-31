@@ -6,6 +6,11 @@ async function getSales() {
   return Sale.findAll();
 }
 
+async function getSalesByUserEmail(email) {
+  const user = await User.findOne({ where: { email } });
+  return Sale.findAll({ where: { userId: user.id } });
+}
+
 async function getSalesProductById(id) {
   const sale = await Sale.findByPk(id);
   const seller = await User.findByPk(sale.sellerId);
@@ -31,4 +36,4 @@ async function getSalesProductById(id) {
   };
 }
 
-module.exports = { getSales, getSalesProductById };
+module.exports = { getSales, getSalesByUserEmail, getSalesProductById };

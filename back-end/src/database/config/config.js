@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    database: 'app_delivery',
+    database: process.env.MYSQL_DB_NAME,
     host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
     port: process.env.MYSQL_PORT || '3306',
     username: process.env.MYSQL_USER || 'root',
@@ -14,7 +14,7 @@ module.exports = {
     logging: false,
   },
   test: {
-    database: 'app_delivery',
+    database: process.env.MYSQL_DB_NAME,
     host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
     port: process.env.MYSQL_PORT || '3306',
     username: process.env.MYSQL_USER || 'root',
@@ -26,7 +26,7 @@ module.exports = {
     logging: false
   },
   production: {
-    database: 'app_delivery',
+    database: process.env.MYSQL_DB_NAME,
     host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
     port: process.env.MYSQL_PORT || '3306',
     username: process.env.MYSQL_USER || 'root',
@@ -37,4 +37,4 @@ module.exports = {
     },
     logging: false
   },
-}; 
+};
