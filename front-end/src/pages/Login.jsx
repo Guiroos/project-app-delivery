@@ -23,9 +23,9 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="login">
-      <Image src={logo} alt="logo" className="login-logo" />
+    <div className="flex flex-col items-center justify-center mx-auto w-screen h-screen">
       {isLogin && navigate(path)}
+      <Image src={logo} alt="logo" className="sm:h-52 lg:h-80" />
       <LoginForm />
     </div>
   );
