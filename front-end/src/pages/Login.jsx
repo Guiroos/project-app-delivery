@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import LoginForm from "../components/LoginForm";
 import { getItemLocalStorage } from "../services";
-import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function Login() {
@@ -25,7 +24,7 @@ export default function Login() {
   return (
     <div className="flex flex-col items-center justify-center mx-auto w-screen h-screen">
       {isLogin && navigate(path)}
-      <Image src={logo} alt="logo" className="sm:h-52 lg:h-80" />
+      <img src={logo} alt="logo" className="h-56 lg:h-96" />
       <LoginForm />
     </div>
   );
