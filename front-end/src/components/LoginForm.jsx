@@ -58,7 +58,6 @@ export default function LoginForm() {
         className="bg-slate-100 shadow-md rounded px-8 py-8 mb-4"
         onSubmit={handleSubmit(onSubmit)}
       >
-
         <div className="mb-5">
           <label className="block mb-3" htmlFor="email">
             Email
@@ -110,14 +109,21 @@ export default function LoginForm() {
         )}
 
         <div className="flex items-center justify-around text-white">
-          <button className="bg-blue-500 hover:bg-blue-700 py-3 px-4 rounded-md font-bold cursor-pointer" type="submit" disabled={!isValid}>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 py-3 px-4 rounded-md font-bold cursor-pointer"
+            type="submit"
+            disabled={!isValid}
+          >
             Sign in
           </button>
-          <button className="bg-purple-500 hover:bg-purple-700 py-3 px-4 rounded-md font-bold cursor-pointer"  type="button" onClick={() => navigate("/register")}>
+          <button
+            className="bg-purple-500 hover:bg-purple-700 py-3 px-4 rounded-md font-bold cursor-pointer"
+            type="button"
+            onClick={() => navigate("/register")}
+          >
             New account?
           </button>
         </div>
-
       </form>
       <p className="text-xs">©2022 All rights reserved to guiroos</p>
     </div>
