@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   STATUS,
   EMAIL_PATTERN,
@@ -10,6 +11,7 @@ import {
 
 export default function RegisterForm() {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -26,16 +28,19 @@ export default function RegisterForm() {
   });
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const sendData = await apiPostBody("/register", data);
       if (sendData.status === STATUS.CREATED) {
         saveToLocalStorage("user", sendData.data);
         navigate("/customer/products");
+        setIsLoading(false);
       }
     } catch (err) {
       console.log(err);
-      if (err.response.status === STATUS.NOT_FOUND) {
+      if (err.response.status === STATUS.CONFLICT) {
         setErrorMessage("Usuário já existente");
+        setIsLoading(false);
       }
     }
   };
@@ -110,7 +115,11 @@ export default function RegisterForm() {
           )}
         </div>
 
-        <div className="flex items-center justify-around text-white">
+        {errorMessage && (
+          <p className="mt-1 text-red-500 text-base">{errorMessage}</p>
+        )}
+
+        <div className="flex items-center justify-around text-white mt-4">
           <button
             className="bg-purple-500 hover:bg-purple-700 py-3 px-4 rounded-md font-bold cursor-pointer"
             type="button"
@@ -119,14 +128,16 @@ export default function RegisterForm() {
             Go back
           </button>
           <button
-            className="bg-blue-500 hover:bg-blue-700 py-3 px-4 rounded-md font-bold cursor-pointer"
+            className="flex justify-center items-center gap-2 bg-blue-500 cursor-pointer disabled:cursor-not-allowed hover:valid:bg-blue-700 py-3 px-4 rounded-md font-bold"
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
           >
+            {isLoading && (
+              <AiOutlineLoading3Quarters className="animate-spin h-5 w-5 mr-3" />
+            )}
             Register
           </button>
         </div>
-        {errorMessage && <p>{errorMessage}</p>}
       </form>
     </div>
   );

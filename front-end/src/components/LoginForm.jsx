@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   saveToLocalStorage,
   apiPostBody,
@@ -10,6 +11,7 @@ import {
 
 export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -35,12 +37,14 @@ export default function LoginForm() {
   };
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const sendData = await apiPostBody("/login", data);
       if (sendData.status === STATUS.OK) {
         saveToLocalStorage("user", sendData.data);
         const path = verifyRole(sendData.data.role);
         navigate(path);
+        setIsLoading(false);
       } else {
         setErrorMessage("Usuário não existe ou senha incorreta");
       }
@@ -48,6 +52,7 @@ export default function LoginForm() {
       console.log(err);
       if (err.response.status === STATUS.NOT_FOUND) {
         setErrorMessage("Usuário não existe ou senha incorreta");
+        setIsLoading(false);
       }
     }
   };
@@ -105,15 +110,18 @@ export default function LoginForm() {
         </div>
 
         {errorMessage && (
-          <p className="mt-1 text-red-500 text-sm">{errorMessage}</p>
+          <p className="mt-1 text-red-500 text-base">{errorMessage}</p>
         )}
 
-        <div className="flex items-center justify-around text-white">
+        <div className="flex items-center justify-around text-white mt-2">
           <button
-            className="bg-blue-500 hover:bg-blue-700 py-3 px-4 rounded-md font-bold cursor-pointer"
+            className="flex justify-center items-center gap-2 bg-blue-500 cursor-pointer disabled:cursor-not-allowed hover:valid:bg-blue-700 py-3 px-4 rounded-md font-bold"
             type="submit"
             disabled={!isValid}
           >
+            {isLoading && (
+              <AiOutlineLoading3Quarters className="animate-spin h-5 w-5 mr-3" />
+            )}
             Sign in
           </button>
           <button
