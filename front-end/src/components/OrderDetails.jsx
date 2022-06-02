@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { apiPut, formatDate, validPrice } from "../services";
+import GoBackButton from "./GoBackButton";
 
 export default function OrderDetails({
   orderDetails,
@@ -113,17 +114,14 @@ export default function OrderDetails({
         </table>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <div className="p-4 text-blue-400 cursor-pointer">
-          <p
-            onClick={() =>
-              userRole === "customer"
-                ? navigate("/customer/orders")
-                : navigate("/seller/orders")
-            }
-          >
-            ← Go back
-          </p>
-        </div>
+        <GoBackButton
+          toDo={() =>
+            userRole === "customer"
+              ? navigate("/customer/orders")
+              : navigate("/seller/orders")
+          }
+          text="← Go back"
+        />
         <div className="p-3 bg-violet-800 rounded-lg">
           <p className="text-3xl font-bold text-white">{`Total: R$ ${validPrice(
             totalPrice

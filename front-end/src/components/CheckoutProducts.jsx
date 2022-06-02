@@ -6,6 +6,7 @@ import {
   saveToLocalStorage,
   validPrice,
 } from "../services";
+import GoBackButton from "./GoBackButton";
 
 export default function CheckoutProducts({ cart, setCart, totalPrice }) {
   const navigate = useNavigate();
@@ -65,11 +66,10 @@ export default function CheckoutProducts({ cart, setCart, totalPrice }) {
         </table>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <div className=" text-blue-400 cursor-pointer">
-          <p onClick={() => navigate("/customer/products")}>
-            ← Continue Shopping
-          </p>
-        </div>
+        <GoBackButton
+          toDo={() => navigate("/customer/products")}
+          text="← Continue Shopping"
+        />
         <div className="flex justify-between items-center rounded-lg bg-violet-50 text-sm p-2">
           <div className="p-2">
             <p className="">{`Sub Total: R$ ${validPrice(totalPrice)}`}</p>
