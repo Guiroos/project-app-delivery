@@ -12,6 +12,8 @@ export default function ProductsCard({ id, name, price, urlImage }) {
   const localStorageQuantity =
     getItemLocalStorage("cart")?.find((e) => e.id === id)?.quantity ?? 0;
   const [localQuantity, setLocalQuantity] = useState(localStorageQuantity);
+  const min = 0;
+  const max = 1000;
 
   useEffect(() => {
     if (!products.length) saveToLocalStorage("cart", []);
@@ -20,7 +22,7 @@ export default function ProductsCard({ id, name, price, urlImage }) {
 
   const handleClick = (type) => {
     if (type === "add") {
-      const quantity = localQuantity + 1;
+      const quantity = localQuantity >= 1000 ? 1000 : localQuantity + 1;
       setLocalQuantity(quantity);
       manageCart.add({ id: +id, price, name, quantity });
     }
@@ -32,7 +34,8 @@ export default function ProductsCard({ id, name, price, urlImage }) {
   };
 
   const handleChange = (value) => {
-    setLocalQuantity(+value);
+    const rangeValue = Math.max(min, Math.min(max, Number(value)));
+    setLocalQuantity(+rangeValue);
     manageCart.overwrite({ id: +id, quantity: value, name, price });
   };
 
@@ -59,7 +62,8 @@ export default function ProductsCard({ id, name, price, urlImage }) {
         <input
           type="number"
           name="quantity"
-          min={0}
+          min="0"
+          max="1000"
           value={+localQuantity}
           onChange={(e) => handleChange(+e.target.value)}
           className="w-full h-14 text-center text-black"
