@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CartProvider } from "../contexts";
 import { Navbar, ProductCard, ProductCheckoutButton } from "../components";
 import { apiGet } from "../services";
-import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function Products() {
@@ -11,8 +10,8 @@ export default function Products() {
 
   useEffect(() => {
     const asyncFunc = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const response = await apiGet("/products");
         setProducts(response.data);
         setIsLoading(false);
@@ -26,8 +25,8 @@ export default function Products() {
   const renderProducts = () => {
     if (isLoading) {
       return (
-        <div className="loading">
-          <Image className="loading_image" src={logo} alt="" />
+        <div className="flex w-screen h-screen items-center justify-center">
+          <img className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]" src={logo} alt="Loading" />
         </div>
       );
     } else {
