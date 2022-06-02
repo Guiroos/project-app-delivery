@@ -1,5 +1,4 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
 import { apiDelete } from "../services";
 
 export default function AdminUsersList({ users, changeButton }) {
@@ -11,13 +10,13 @@ export default function AdminUsersList({ users, changeButton }) {
   const renderUsers = () => {
     return users.map((user, index) => {
       return (
-        <tr key={index}>
-          <td className="table_row_id">{index + 1}</td>
-          <td className="table_row_name">{user.name}</td>
-          <td className="table_row_email">{user.email}</td>
-          <td className="table_row_role">{user.role}</td>
+        <tr className="text-left text-gray-900" key={user.id}>
+          <td className="px-6 py-4">{index + 1}</td>
+          <td className="px-6 py-4">{user.name}</td>
+          <td className="px-6 py-4">{user.email}</td>
+          <td className="px-6 py-4 capitalize">{user.role}</td>
           <td
-            className="table_row_button"
+            className="px-6 py-4 cursor-pointer font-medium bg-red-600 text-white hover:underline text-center"
             onClick={(e) => handleClick(e, user)}
           >
             Remover
@@ -28,17 +27,26 @@ export default function AdminUsersList({ users, changeButton }) {
   };
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Tipo</th>
-          <th>Excluir</th>
-        </tr>
-      </thead>
-      <tbody>{renderUsers()}</tbody>
-    </Table>
+    <div className="mx-8 my-4 text-sm md:text-base lg:text-xl">
+      <p className="inline-block text-xl mb-4 border-b-2 border-violet-800">
+        Lista de Usuários
+      </p>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg text-left">
+        <table className="w-full">
+          <thead className="bg-gray-50 uppercase">
+            <tr>
+              <th className="px-6 py-3">#</th>
+              <th className="px-6 py-3">Nome</th>
+              <th className="px-6 py-3">Email</th>
+              <th className="px-6 py-3">Tipo</th>
+              <th className="px-6 py-3">
+                <p className="sr-only">Remover Item</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{renderUsers()}</tbody>
+        </table>
+      </div>
+    </div>
   );
 }
