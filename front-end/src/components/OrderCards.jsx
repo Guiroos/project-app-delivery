@@ -7,14 +7,14 @@ export default function OrderCards({ order, index, userRole, statusColor }) {
 
   return (
     <div
-      className="bg-gray-200 shadow-lg border rounded-lg text-2xl md:text-xl lg:text-base"
+      className="bg-gray-200 shadow-lg border rounded-lg text-2xl md:text-xl lg:text-base cursor-pointer"
       onClick={
         userRole === "customer"
           ? () => navigate(`/customer/orders/${order.id}`)
           : () => navigate(`/seller/orders/${order.id}`)
       }
     >
-      <div className="p-3 bg-white flex flex-col text-center justify-center">
+      <div className="p-3 rounded-t-lg bg-white flex flex-col text-center justify-center">
         <p>Pedido</p>
         <p>{(index + 1).toString().padStart(4, "0")}</p>
       </div>
@@ -33,7 +33,7 @@ export default function OrderCards({ order, index, userRole, statusColor }) {
         </div>
       </div>
       {userRole === "seller" && (
-        <div>
+        <div className="bg-gray-100 text-left mx-2 mb-2 p-2 rounded-lg">
           <p>{order.deliveryAddress}</p>
         </div>
       )}

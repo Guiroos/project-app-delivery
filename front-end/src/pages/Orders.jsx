@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, OrderCards } from "../components";
 import { apiGet, changeStatusColor, getItemLocalStorage } from "../services";
-import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function Orders() {
@@ -13,8 +12,8 @@ export default function Orders() {
     setUserRole(getItemLocalStorage("user").role);
     const asyncFunc = async () => {
       if (userRole === "customer") {
+        setIsLoading(true);
         try {
-          setIsLoading(true);
           const { email } = getItemLocalStorage("user");
           const response = await apiGet(`/sale/orders/email/${email}`);
           setOrderDetails(response.data);
@@ -23,8 +22,8 @@ export default function Orders() {
           console.log(err);
         }
       } else if (userRole === "seller") {
+        setIsLoading(true);
         try {
-          setIsLoading(true);
           const { email } = getItemLocalStorage("user");
           const response = await apiGet(`/sellers/orders/email/${email}`);
           setOrderDetails(response.data);
@@ -40,8 +39,8 @@ export default function Orders() {
   const renderOrders = () => {
     if (isLoading) {
       return (
-        <div className="loading">
-          <Image className="loading_image" src={logo} alt="" />
+        <div className="flex w-screen h-screen items-center justify-center">
+          <img className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]" src={logo} alt="Loading" />
         </div>
       );
     } else {
