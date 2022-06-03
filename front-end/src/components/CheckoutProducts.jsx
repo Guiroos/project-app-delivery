@@ -41,7 +41,7 @@ export default function CheckoutProducts({ cart, setCart, totalPrice }) {
           toDo={() => navigate("/customer/products")}
           text="← Continue Shopping"
         />
-        <div className="flex justify-between items-center rounded-lg bg-violet-50 text-sm p-2">
+        <div className="flex justify-between items-center rounded-lg bg-violet-50 text-sm">
           <div className="p-2">
             <p className="">{`Sub Total: R$ ${validPrice(totalPrice)}`}</p>
           </div>
