@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts";
-import Button from "react-bootstrap/Button";
 
 export default function ProductCheckout() {
   const { products } = useContext(CartContext);
@@ -28,12 +27,12 @@ export default function ProductCheckout() {
   }, [products]);
 
   return (
-    <div className="checkout_card d-grid gap-2 m-flex p-3 justify-content-md-end float">
-      <Button type="button" disabled={cartPrice === 0} onClick={handleClick}>
-        <span className="checkout_card_price">
+    <div className="fixed bottom-5 right-5 bg-blue-500 text-white p-2 rounded-lg">
+      <button type="button" disabled={cartPrice === 0} onClick={handleClick}>
+        <p className="checkout_card_price">
           Ver Carrinho: R$ {cartPrice.toFixed(2).replace(".", ",")}
-        </span>
-      </Button>
+        </p>
+      </button>
     </div>
   );
 }

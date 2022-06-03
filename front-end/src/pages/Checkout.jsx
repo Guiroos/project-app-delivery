@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CheckoutForm, CheckoutProducts, Navbar } from "../components";
-import { apiGet, getItemLocalStorage, validPrice } from "../services";
-import Container from "react-bootstrap/Container";
-import Image from "react-bootstrap/Image";
+import { apiGet, getItemLocalStorage } from "../services";
 import logo from "../images/doughnut_logo.png";
 
 export default function Checkout() {
@@ -17,8 +15,8 @@ export default function Checkout() {
 
   useEffect(() => {
     const asyncFunc = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const cartStorage = getItemLocalStorage("cart");
         const resSellers = await apiGet("/sellers");
         setSellers(resSellers.data);
@@ -34,31 +32,24 @@ export default function Checkout() {
   const renderCheckout = () => {
     if (isLoading) {
       return (
-        <div className="loading">
-          <Image className="loading_image" src={logo} alt="" />
+        <div className="flex w-screen h-screen items-center justify-center">
+          <img className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]" src={logo} alt="Loading" />
         </div>
       );
     } else {
       return (
         <main className="checkout_page">
           <Navbar />
-          <Container fluid="md" className="checkout_table_container">
-            <h4>Finalizar Pedido</h4>
-            <div className="box">
-              <CheckoutProducts cart={cart} setCart={setCart} />
-              <span className="table_total">{`Total: R$ ${validPrice(
-                cartTotalPrice
-              )}`}</span>
-            </div>
-            <h4>Endereço de Entrega</h4>
-            <div className="box">
-              <CheckoutForm
-                cart={cart}
-                totalPrice={cartTotalPrice}
-                sellers={sellers}
-              />
-            </div>
-          </Container>
+          <CheckoutProducts
+            cart={cart}
+            setCart={setCart}
+            totalPrice={cartTotalPrice}
+          />
+          <CheckoutForm
+            cart={cart}
+            totalPrice={cartTotalPrice}
+            sellers={sellers}
+          />
         </main>
       );
     }

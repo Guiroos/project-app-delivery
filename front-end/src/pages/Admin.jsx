@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, AdminRegisterForm, AdminUsersList } from "../components";
 import { apiGet } from "../services";
-import Image from "react-bootstrap/Image";
 import logo from "../images/doughnut_logo.png";
 
 export default function Admin() {
@@ -14,11 +13,15 @@ export default function Admin() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const asyncFunction = async () => {
-      setIsLoading(true);
-      const response = await apiGet("/user/all");
-      setUsers(response.data);
-      setIsLoading(false);
+      try {
+        const response = await apiGet("/user/all");
+        setUsers(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
     asyncFunction();
   }, [buttonClicked]);
@@ -26,8 +29,12 @@ export default function Admin() {
   const renderAdmin = () => {
     if (isLoading) {
       return (
-        <div className="loading">
-          <Image className="loading_image" src={logo} alt="" />
+        <div className="flex w-screen h-screen items-center justify-center">
+          <img
+            className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]"
+            src={logo}
+            alt="Loading"
+          />
         </div>
       );
     } else {
@@ -41,5 +48,5 @@ export default function Admin() {
     }
   };
 
-  return <>{renderAdmin()}</>
+  return <>{renderAdmin()}</>;
 }
