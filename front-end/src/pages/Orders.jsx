@@ -50,6 +50,7 @@ export default function Orders() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 p-16">
             {orderDetails.map((order, index) => (
               <OrderCards
+                key={order.id}
                 order={order}
                 index={index}
                 userRole={userRole}
