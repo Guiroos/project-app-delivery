@@ -11,6 +11,7 @@
     "start": "node .",
     "dev": "nodemon .",
     "test": "jest",
+    "db:create": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
