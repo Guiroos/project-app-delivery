@@ -3,6 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { apiPut, formatDate, validPrice } from "../services";
 import GoBackButton from "./GoBackButton";
+import TableBody from "./TableBody";
+import TableHeader from "./TableHeader";
 
 export default function OrderDetails({
   orderDetails,
@@ -17,25 +19,6 @@ export default function OrderDetails({
   const handleClick = async (value) => {
     await apiPut(`sellers/status/id/${id}`, { newStatus: value });
     changeButton();
-  };
-
-  const renderItemsTable = () => {
-    return cart.map((item, index) => {
-      const totalPrice = (item.quantity * item.price).toFixed(2);
-      return (
-        <tr className="text-center text-gray-900" key={index}>
-          <td className="px-6 py-4">{index + 1}</td>
-          <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left">
-            {item.name}
-          </td>
-          <td className="">{item.quantity}</td>
-          <td className="px-6 py-4">{`R$ ${validPrice(item.price)}`}</td>
-          <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{`R$ ${validPrice(
-            totalPrice
-          )}`}</td>
-        </tr>
-      );
-    });
   };
 
   return (
@@ -103,14 +86,12 @@ export default function OrderDetails({
         <table className="w-full">
           <thead className="bg-gray-50 uppercase">
             <tr>
-              <th className="px-6 py-3">Item</th>
-              <th className="px-6 py-3 text-left">Descrição</th>
-              <th className="px-2 py-3">Quantidade</th>
-              <th className="px-6 py-3">Valor Unitário</th>
-              <th className="px-6 py-3">Sub-Total</th>
+              <TableHeader button={false} />
             </tr>
           </thead>
-          <tbody>{renderItemsTable()}</tbody>
+          <tbody>
+            <TableBody cart={cart} />
+          </tbody>
         </table>
       </div>
       <div className="flex justify-between items-center mt-4">
