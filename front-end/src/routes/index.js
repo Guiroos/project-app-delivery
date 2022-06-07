@@ -14,6 +14,7 @@ import {
   OrdersDetails,
   Admin,
 } from "../pages";
+import PrivateRoute from "./PrivateRoute";
 
 export default function RoutesApp() {
   return (
@@ -23,13 +24,62 @@ export default function RoutesApp() {
           <Route path="*" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/customer/products" element={<Products />} />
-          <Route path="/customer/checkout" element={<Checkout />} />
-          <Route path="/customer/orders" element={<Orders />} />
-          <Route path="/customer/orders/:id" element={<OrdersDetails />} />
-          <Route path="/seller/orders" element={<Orders />} />
-          <Route path="/seller/orders/:id" element={<OrdersDetails />} />
-          <Route path="/admin/manage" element={<Admin />} />
+          <Route
+            path="/customer/products"
+            element={(
+              <PrivateRoute>
+                <Products />
+              </PrivateRoute>
+            )}
+          />
+          <Route
+            path="/customer/checkout"
+            element={(
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            )}
+          />
+          <Route
+            path="/customer/orders"
+            element={(
+              <PrivateRoute>
+                <Orders />
+              </PrivateRoute>
+            )}
+          />
+          <Route
+            path="/customer/orders/:id"
+            element={(
+              <PrivateRoute>
+                <OrdersDetails />
+              </PrivateRoute>
+            )}
+          />
+          <Route
+            path="/seller/orders"
+            element={(
+              <PrivateRoute>
+                <Orders />
+              </PrivateRoute>
+            )}
+          />
+          <Route
+            path="/seller/orders/:id"
+            element={(
+              <PrivateRoute>
+                <OrdersDetails />
+              </PrivateRoute>
+            )}
+          />
+          <Route
+            path="/admin/manage"
+            element={(
+              <PrivateRoute>
+                <Admin />
+              </PrivateRoute>
+            )}
+          />
         </Routes>
       </BrowserRouter>
     </div>
