@@ -22,13 +22,18 @@ export default function CheckoutForm({ cart, totalPrice, sellers }) {
   const onSubmit = async (data) => {
     const { token, email } = getItemLocalStorage("user");
     const orderData = {
-      order: { ...data, cart, email, orderPrice: totalPrice },
+      order: {
+        ...data,
+        cart,
+        email,
+        orderPrice: totalPrice,
+      },
     };
     try {
       const response = await apiPostToken(
         "/customer/checkout",
         orderData,
-        token
+        token,
       );
       if (response.status === STATUS.CREATED) {
         const idOrder = response.data.saleId;
@@ -114,21 +119,9 @@ export default function CheckoutForm({ cart, totalPrice, sellers }) {
 }
 
 CheckoutForm.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  cart: PropTypes.isRequired,
+  sellers: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
   totalPrice: PropTypes.string.isRequired,
-  sellers: PropTypes.arrayOf(
-    PropTypes.shape({
-      email: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };

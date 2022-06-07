@@ -28,11 +28,11 @@ export default function CheckoutProducts({ cart, setCart, totalPrice }) {
         <table className="w-full">
           <thead className="bg-gray-50 uppercase">
             <tr>
-              <TableHeader button={true} />
+              <TableHeader button />
             </tr>
           </thead>
           <tbody>
-            <TableBody cart={cart} button={true} handleClick={handleClick} />
+            <TableBody cart={cart} button handleClick={handleClick} />
           </tbody>
         </table>
       </div>
@@ -52,9 +52,9 @@ export default function CheckoutProducts({ cart, setCart, totalPrice }) {
             <p className="">{`Desconto: R$ ${validPrice("0,00")}`}</p>
           </div>
           <div className="p-3 bg-violet-800 rounded-lg">
-            <p className="text-xl md:text-3xl font-bold text-white">{`Total: R$ ${validPrice(
-              totalPrice
-            )}`}</p>
+            <p className="text-xl md:text-3xl font-bold text-white">
+              {`Total: R$ ${validPrice(totalPrice)}`}
+            </p>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ CheckoutProducts.propTypes = {
       name: PropTypes.string.isRequired,
       quantity: PropTypes.number.isRequired,
       price: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   setCart: PropTypes.func.isRequired,
   totalPrice: PropTypes.string.isRequired,

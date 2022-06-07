@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 export default function TableHeader({ button }) {
@@ -16,3 +17,7 @@ export default function TableHeader({ button }) {
     </>
   );
 }
+
+TableHeader.propTypes = {
+  button: PropTypes.bool.isRequired,
+};

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { createContext, useState } from "react";
+import React, { createContext, useMemo, useState } from "react";
 import { getItemLocalStorage } from "../services";
 
 export const CartContext = createContext({});
@@ -8,11 +8,18 @@ export default function CartProvider({ children }) {
   const cartLocalStorage = getItemLocalStorage("cart") ?? [];
   const [products, setProducts] = useState(cartLocalStorage);
 
-  function add({ id, price, name, quantity }) {
+  function add({
+    id, price, name, quantity,
+  }) {
     const copyProducts = [...products];
     const product = copyProducts.find((e) => e.id === id);
     if (!product) {
-      const newProduct = { id, quantity, name, price };
+      const newProduct = {
+        id,
+        quantity,
+        name,
+        price,
+      };
       copyProducts.push(newProduct);
       setProducts(copyProducts);
     } else {
@@ -34,11 +41,18 @@ export default function CartProvider({ children }) {
     }
   }
 
-  function overwrite({ id, quantity, name, price }) {
+  function overwrite({
+    id, quantity, name, price,
+  }) {
     const copyProducts = [...products];
     const product = copyProducts.find((e) => e.id === id);
     if (!product && quantity > 0) {
-      const newProduct = { id, quantity, name, price };
+      const newProduct = {
+        id,
+        quantity,
+        name,
+        price,
+      };
       copyProducts.push(newProduct);
       setProducts(copyProducts);
     } else if (product && quantity === 0) {
@@ -57,8 +71,10 @@ export default function CartProvider({ children }) {
     overwrite,
   };
 
+  const BaseProviderValue = useMemo(() => ({ products, manageCart }), [products, manageCart]);
+
   return (
-    <CartContext.Provider value={{ products, manageCart }}>
+    <CartContext.Provider value={BaseProviderValue}>
       {children}
     </CartContext.Provider>
   );

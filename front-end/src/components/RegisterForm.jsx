@@ -73,8 +73,8 @@ export default function RegisterForm() {
           )}
         </div>
 
-        <div className="mb-5">
-          <label>Email</label>
+        <div className="block mb-3" htmlFor="name">
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -94,7 +94,9 @@ export default function RegisterForm() {
         </div>
 
         <div className="mb-5">
-          <label>Senha</label>
+          <label className="block mb-3" htmlFor="password">
+            Senha
+          </label>
           <input
             type="password"
             id="password"

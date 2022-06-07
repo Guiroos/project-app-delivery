@@ -37,15 +37,14 @@ export default function Admin() {
           />
         </div>
       );
-    } else {
-      return (
-        <main>
-          <Navbar />
-          <AdminRegisterForm changeButton={changeButton} />
-          <AdminUsersList users={users} changeButton={changeButton} />
-        </main>
-      );
     }
+    return (
+      <main>
+        <Navbar />
+        <AdminRegisterForm changeButton={changeButton} />
+        <AdminUsersList users={users} changeButton={changeButton} />
+      </main>
+    );
   };
 
   return <>{renderAdmin()}</>;
