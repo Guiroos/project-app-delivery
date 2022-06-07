@@ -19,6 +19,7 @@
         "react",
         "cypress"
     ],
+    "ignorePatterns": ["*.config.js"],
     "rules": {
       "quotes": ["error", "double"],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
