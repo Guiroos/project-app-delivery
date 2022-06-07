@@ -20,12 +20,24 @@
         "cypress"
     ],
     "rules": {
+      "quotes": ["error", "double"],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/jsx-props-no-spreading": "off",
+      "jsx-a11y/label-has-associated-control": ["error", {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }],
+      "jsx-a11y/label-has-for": ["error", {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }],
       "cypress/no-assigning-return-values": "error",
       "cypress/no-unnecessary-waiting": "error",
       "cypress/assertion-before-screenshot": "warn",
       "cypress/no-force": "warn",
       "cypress/no-async-tests": "error",
-      "cypress/no-pause": "error",
-      "quotes": ["error", "double"]
+      "cypress/no-pause": "error"
     }
 }
