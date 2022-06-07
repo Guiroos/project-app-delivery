@@ -1,13 +1,17 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getItemLocalStorage,
   saveToLocalStorage,
   validPrice,
 } from "../services";
-import Table from "react-bootstrap/Table";
+import GoBackButton from "./GoBackButton";
+import TableBody from "./TableBody";
+import TableHeader from "./TableHeader";
 
-export default function CheckoutProducts({ cart, setCart }) {
+export default function CheckoutProducts({ cart, setCart, totalPrice }) {
+  const navigate = useNavigate();
   const handleClick = (_e, item) => {
     const cartStorage = getItemLocalStorage("cart");
     const filteredMap = cartStorage.filter((iCart) => iCart.id !== item.id);
@@ -15,42 +19,46 @@ export default function CheckoutProducts({ cart, setCart }) {
     saveToLocalStorage("cart", filteredMap);
   };
 
-  const renderItemsTable = () => {
-    return cart.map((item, index) => {
-      const totalPrice = (item.quantity * item.price).toFixed(2);
-      return (
-        <tr key={index}>
-          <td className="table_row_id">{index + 1}</td>
-          <td className="table_row_name">{item.name}</td>
-          <td className="table_row_quantity">{item.quantity}</td>
-          <td className="table_row_price">{`R$ ${validPrice(item.price)}`}</td>
-          <td className="table_row_total">{`R$ ${validPrice(totalPrice)}`}</td>
-          <td
-            className="table_row_button"
-            value={item.id}
-            onClick={(e) => handleClick(e, item)}
-          >
-            Remover
-          </td>
-        </tr>
-      );
-    });
-  };
-
   return (
-    <Table className="checkout_page_table" bordered>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-Total</th>
-          <th>Remover Item</th>
-        </tr>
-      </thead>
-      <tbody>{renderItemsTable()}</tbody>
-    </Table>
+    <div className="m-8 text-sm md:text-base lg:text-xl">
+      <p className="inline-block text-xl mb-4 border-b-2 border-violet-800">
+        Finalizar Pedido
+      </p>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        <table className="w-full">
+          <thead className="bg-gray-50 uppercase">
+            <tr>
+              <TableHeader button={true} />
+            </tr>
+          </thead>
+          <tbody>
+            <TableBody cart={cart} button={true} handleClick={handleClick} />
+          </tbody>
+        </table>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <GoBackButton
+          toDo={() => navigate("/customer/products")}
+          text="← Continue Shopping"
+        />
+        <div className="flex justify-between items-center rounded-lg bg-violet-50 text-sm">
+          <div className="p-2">
+            <p className="">{`Sub Total: R$ ${validPrice(totalPrice)}`}</p>
+          </div>
+          <div className="p-2">
+            <p className="">{`Frete: R$ ${validPrice("0.00")}`}</p>
+          </div>
+          <div className="p-2">
+            <p className="">{`Desconto: R$ ${validPrice("0,00")}`}</p>
+          </div>
+          <div className="p-3 bg-violet-800 rounded-lg">
+            <p className="text-xl md:text-3xl font-bold text-white">{`Total: R$ ${validPrice(
+              totalPrice
+            )}`}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -64,4 +72,5 @@ CheckoutProducts.propTypes = {
     })
   ).isRequired,
   setCart: PropTypes.func.isRequired,
+  totalPrice: PropTypes.string.isRequired,
 };

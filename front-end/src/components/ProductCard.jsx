@@ -6,14 +6,14 @@ import {
   saveToLocalStorage,
   getItemLocalStorage,
 } from "../services";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 
 export default function ProductsCard({ id, name, price, urlImage }) {
   const { products, manageCart } = useContext(CartContext);
   const localStorageQuantity =
     getItemLocalStorage("cart")?.find((e) => e.id === id)?.quantity ?? 0;
   const [localQuantity, setLocalQuantity] = useState(localStorageQuantity);
+  const min = 0;
+  const max = 1000;
 
   useEffect(() => {
     if (!products.length) saveToLocalStorage("cart", []);
@@ -22,7 +22,7 @@ export default function ProductsCard({ id, name, price, urlImage }) {
 
   const handleClick = (type) => {
     if (type === "add") {
-      const quantity = localQuantity + 1;
+      const quantity = localQuantity >= 1000 ? 1000 : localQuantity + 1;
       setLocalQuantity(quantity);
       manageCart.add({ id: +id, price, name, quantity });
     }
@@ -34,48 +34,50 @@ export default function ProductsCard({ id, name, price, urlImage }) {
   };
 
   const handleChange = (value) => {
-    setLocalQuantity(+value);
+    const rangeValue = Math.max(min, Math.min(max, Number(value)));
+    setLocalQuantity(+rangeValue);
     manageCart.overwrite({ id: +id, quantity: value, name, price });
   };
 
   return (
-    <Card className="bg-dark customer_products">
-      <Card.Img className="card_img" src={urlImage} alt={name} />
-      <Card.ImgOverlay className="card_img_overlay">
-        <Card.Text className="card__price">
-          {`R$ ${validPrice(price)}`}
-        </Card.Text>
-      </Card.ImgOverlay>
-      <Card.Body className="card_body">
-        <Card.Title className="card_name text-white">{name}</Card.Title>
-      </Card.Body>
-      <Card.Footer className="card_footer">
-        <Button
-          variant="success"
-          type="submit"
+    <div className="shadow-lg border rounded-lg text-2xl md:text-xl lg:text-base">
+      <div className="">
+        <div className="absolute m-4 bg-slate-100 rounded-md p-2 shadow-md">{`R$ ${validPrice(
+          price
+        )}`}</div>
+        <img className="rounded-lg" src={urlImage} alt={name} />
+      </div>
+      <div className="flex items-center justify-center h-20 bg-slate-800 text-white px-10 py-4 ">
+        <p className="">{name}</p>
+      </div>
+      <div className="h-fit flex items-center justify-center gap-2 py-4 px-2 bg-slate-800 text-white">
+        <button
+          className="bg-green-700 hover:bg-green-800 box-border h-14 w-14 rounded-lg"
+          type="button"
           onClick={() => handleClick("remove")}
         >
           -
-        </Button>
+        </button>
 
         <input
-          className="input_quantity"
           type="number"
           name="quantity"
-          min={0}
+          min="0"
+          max="1000"
           value={+localQuantity}
           onChange={(e) => handleChange(+e.target.value)}
+          className="w-full h-14 text-center text-black"
         />
 
-        <Button
-          variant="success"
-          type="submit"
+        <button
+          className="bg-green-700 hover:bg-green-800  box-border h-14 w-14  rounded-lg"
+          type="button"
           onClick={() => handleClick("add")}
         >
           +
-        </Button>
-      </Card.Footer>
-    </Card>
+        </button>
+      </div>
+    </div>
   );
 }
 

@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { apiPut, formatDate, validPrice } from "../services";
-import Container from "react-bootstrap/Container";
-import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import GoBackButton from "./GoBackButton";
+import TableBody from "./TableBody";
+import TableHeader from "./TableHeader";
 
 export default function OrderDetails({
   orderDetails,
@@ -14,86 +13,103 @@ export default function OrderDetails({
   userRole,
   changeButton,
 }) {
+  const { orderProducts: cart, totalPrice } = orderDetails;
+  const navigate = useNavigate();
+
   const handleClick = async (value) => {
     await apiPut(`sellers/status/id/${id}`, { newStatus: value });
     changeButton();
   };
 
-  const renderItemsTable = () => {
-    return orderDetails.orderProducts.map((item, index) => {
-      const totalPrice = (item.quantity * item.price).toFixed(2);
-      return (
-        <tr key={index}>
-          <td className="table_row_id">{index + 1}</td>
-          <td className="table_row_name">{item.name}</td>
-          <td className="table_row_quantity">{item.quantity}</td>
-          <td className="table_row_price">{`R$ ${validPrice(item.price)}`}</td>
-          <td className="table_row_total">{`R$ ${validPrice(totalPrice)}`}</td>
-        </tr>
-      );
-    });
-  };
-
   return (
-    <>
-      <Container className="od_container">
-        <Row>
-          <Col>{`PEDIDO ${id}`}</Col>
-          {userRole === "customer" && (
-            <Col md="auto">{`VENDEDOR: ${orderDetails.sellerName}`}</Col>
-          )}
-          <Col>{formatDate(orderDetails.saleDate)}</Col>
-          <Col style={{ backgroundColor: statusColor }}>
-            {orderDetails.status}
-          </Col>
-          {userRole === "customer" && (
-            <Col md="auto">
-              <Button
-                value="Entregue"
+    <div className="m-8 text-sm md:text-base lg:text-xl">
+      <p className="inline-block text-lg mb-4 border-b-2 border-violet-800">
+        Detalhes do Pedido
+      </p>
+      <div className="flex justify-between items-center text-center rounded-lg px-4 py-2 mb-4 bg-gray-100 shadow-md">
+        <div className="font-bold">{`PEDIDO ${id
+          .toString()
+          .padStart(4, "0")}`}</div>
+
+        {userRole === "customer" && (
+          <div>{`VENDEDOR: ${orderDetails.sellerName}`}</div>
+        )}
+
+        <div>{formatDate(orderDetails.saleDate)}</div>
+
+        <div
+          className="p-3 rounded-lg uppercase font-bold"
+          style={{ backgroundColor: statusColor }}
+        >
+          {orderDetails.status}
+        </div>
+
+        {userRole === "customer" && (
+          <div>
+            <button
+              value="Entregue"
+              onClick={(e) => handleClick(e.target.value)}
+              disabled={orderDetails.status !== "Em Trânsito"}
+              className="p-3 rounded-lg bg-green-800 hover:valid:bg-green-700 text-white cursor-pointer disabled:cursor-not-allowed"
+            >
+              ENTREGUE
+            </button>
+          </div>
+        )}
+
+        {userRole === "seller" && (
+          <>
+            <div>
+              <button
+                value="Preparando"
                 onClick={(e) => handleClick(e.target.value)}
-                disabled={orderDetails.status !== "Em Trânsito"}
+                disabled={orderDetails.status !== "Pendente"}
+                className="p-3 rounded-lg bg-green-800 hover:valid:bg-green-700 text-white cursor-pointer disabled:cursor-not-allowed"
               >
-                MARCAR COMO ENTREGUE
-              </Button>
-            </Col>
-          )}
-          {userRole === "seller" && (
-            <>
-              <Col md="auto">
-                <Button
-                  value="Preparando"
-                  onClick={(e) => handleClick(e.target.value)}
-                  disabled={orderDetails.status !== "Pendente"}
-                >
-                  PREPARANDO PEDIDO
-                </Button>
-              </Col>
-              <Col md="auto">
-                <Button
-                  value="Em Trânsito"
-                  onClick={(e) => handleClick(e.target.value)}
-                  disabled={orderDetails.status !== "Preparando"}
-                >
-                  SAIU PARA ENTREGA
-                </Button>
-              </Col>
-            </>
-          )}
-        </Row>
-      </Container>
-      <Table className="checkout_page_table" bordered>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-Total</th>
-          </tr>
-        </thead>
-        <tbody>{renderItemsTable()}</tbody>
-      </Table>
-    </>
+                PREPARANDO PEDIDO
+              </button>
+            </div>
+            <div>
+              <button
+                value="Em Trânsito"
+                onClick={(e) => handleClick(e.target.value)}
+                disabled={orderDetails.status !== "Preparando"}
+                className="p-3 rounded-lg bg-green-800 hover:valid:bg-green-700 text-white cursor-pointer disabled:cursor-not-allowed"
+              >
+                SAIU PARA ENTREGA
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        <table className="w-full">
+          <thead className="bg-gray-50 uppercase">
+            <tr>
+              <TableHeader button={false} />
+            </tr>
+          </thead>
+          <tbody>
+            <TableBody cart={cart} />
+          </tbody>
+        </table>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <GoBackButton
+          toDo={() =>
+            userRole === "customer"
+              ? navigate("/customer/orders")
+              : navigate("/seller/orders")
+          }
+          text="← Go back"
+        />
+        <div className="p-3 bg-violet-800 rounded-lg">
+          <p className="text-3xl font-bold text-white">{`Total: R$ ${validPrice(
+            totalPrice
+          )}`}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
