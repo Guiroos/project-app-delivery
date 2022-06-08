@@ -6,7 +6,7 @@ describe("tests routes in login page when not logged in", () => {
   });
 
   it("should visit the login page with login route", () => {
-    cy.visit("/");
+    cy.visit("/login");
     cy.url().should("include", "/login");
     cy.get("#login-page").should("be.visible");
   });
