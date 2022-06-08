@@ -74,7 +74,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky z-10 top-0 h-14 w-full text-white text-lg lg:text-xl bg-violet-800 flex items-center justify-between px-5">
+    <nav
+      id="navbar"
+      className="sticky z-10 top-0 h-14 w-full text-white text-lg lg:text-xl bg-violet-800 flex items-center justify-between px-5"
+    >
       {renderNavbar()}
       <div className="relative z-10">
         <button
