@@ -49,7 +49,7 @@ export default function Orders() {
       );
     }
     return (
-      <main className="animate-bottom">
+      <main id="orders-page" className="animate-bottom">
         <Navbar />
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 p-16">
           {orderDetails.map((order, index) => (

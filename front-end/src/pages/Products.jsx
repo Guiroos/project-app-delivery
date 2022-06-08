@@ -35,7 +35,7 @@ export default function Products() {
       );
     }
     return (
-      <main className="animate-bottom">
+      <main id="products-page" className="animate-bottom">
         <Navbar />
         <CartProvider>
           <div className="w-full">

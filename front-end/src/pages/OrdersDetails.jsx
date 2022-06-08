@@ -45,7 +45,7 @@ export default function OrdersDetails() {
       );
     }
     return (
-      <main className="customer_order_details animate-bottom">
+      <main id="oder-details-page" className="animate-bottom">
         <Navbar />
 
         <OrderDetails

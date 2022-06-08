@@ -42,7 +42,7 @@ export default function Checkout() {
       );
     }
     return (
-      <main className="checkout_page">
+      <main id="checkout-page">
         <Navbar />
         <CheckoutProducts
           cart={cart}

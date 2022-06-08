@@ -22,10 +22,10 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto w-screen h-screen">
+    <main id="login-page" className="flex flex-col items-center justify-center mx-auto w-screen h-screen">
       {isLogin && navigate(path)}
       <img src={logo} alt="logo" className="h-56 lg:h-96" />
       <LoginForm />
-    </div>
+    </main>
   );
 }

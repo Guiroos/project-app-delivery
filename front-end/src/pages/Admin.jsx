@@ -39,7 +39,7 @@ export default function Admin() {
       );
     }
     return (
-      <main>
+      <main id="admin-page">
         <Navbar />
         <AdminRegisterForm changeButton={changeButton} />
         <AdminUsersList users={users} changeButton={changeButton} />
