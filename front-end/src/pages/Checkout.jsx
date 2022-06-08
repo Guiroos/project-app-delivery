@@ -33,26 +33,29 @@ export default function Checkout() {
     if (isLoading) {
       return (
         <div className="flex w-screen h-screen items-center justify-center">
-          <img className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]" src={logo} alt="Loading" />
+          <img
+            className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]"
+            src={logo}
+            alt="Loading"
+          />
         </div>
       );
-    } else {
-      return (
-        <main className="checkout_page">
-          <Navbar />
-          <CheckoutProducts
-            cart={cart}
-            setCart={setCart}
-            totalPrice={cartTotalPrice}
-          />
-          <CheckoutForm
-            cart={cart}
-            totalPrice={cartTotalPrice}
-            sellers={sellers}
-          />
-        </main>
-      );
     }
+    return (
+      <main id="checkout-page">
+        <Navbar />
+        <CheckoutProducts
+          cart={cart}
+          setCart={setCart}
+          totalPrice={cartTotalPrice}
+        />
+        <CheckoutForm
+          cart={cart}
+          totalPrice={cartTotalPrice}
+          sellers={sellers}
+        />
+      </main>
+    );
   };
 
   return <>{renderCheckout()}</>;

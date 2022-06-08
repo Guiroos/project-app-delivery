@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { apiPostToken, EMAIL_PATTERN, getItemLocalStorage } from "../services";
@@ -60,7 +61,7 @@ export default function AdminRegisterForm({ changeButton }) {
           {errors.name && <p>{errors.name.message}</p>}
         </div>
 
-        <div >
+        <div>
           <label className="block pl-2" htmlFor="email">
             Email
           </label>
@@ -130,3 +131,7 @@ export default function AdminRegisterForm({ changeButton }) {
     </div>
   );
 }
+
+AdminRegisterForm.propTypes = {
+  changeButton: PropTypes.func.isRequired,
+};

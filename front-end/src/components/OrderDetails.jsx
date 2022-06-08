@@ -27,9 +27,9 @@ export default function OrderDetails({
         Detalhes do Pedido
       </p>
       <div className="flex justify-between items-center text-center rounded-lg px-4 py-2 mb-4 bg-gray-100 shadow-md">
-        <div className="font-bold">{`PEDIDO ${id
-          .toString()
-          .padStart(4, "0")}`}</div>
+        <div className="font-bold">
+          {`PEDIDO ${id.toString().padStart(4, "0")}`}
+        </div>
 
         {userRole === "customer" && (
           <div>{`VENDEDOR: ${orderDetails.sellerName}`}</div>
@@ -47,6 +47,7 @@ export default function OrderDetails({
         {userRole === "customer" && (
           <div>
             <button
+              type="button"
               value="Entregue"
               onClick={(e) => handleClick(e.target.value)}
               disabled={orderDetails.status !== "Em Trânsito"}
@@ -61,6 +62,7 @@ export default function OrderDetails({
           <>
             <div>
               <button
+                type="button"
                 value="Preparando"
                 onClick={(e) => handleClick(e.target.value)}
                 disabled={orderDetails.status !== "Pendente"}
@@ -71,6 +73,7 @@ export default function OrderDetails({
             </div>
             <div>
               <button
+                type="button"
                 value="Em Trânsito"
                 onClick={(e) => handleClick(e.target.value)}
                 disabled={orderDetails.status !== "Preparando"}
@@ -96,17 +99,15 @@ export default function OrderDetails({
       </div>
       <div className="flex justify-between items-center mt-4">
         <GoBackButton
-          toDo={() =>
-            userRole === "customer"
-              ? navigate("/customer/orders")
-              : navigate("/seller/orders")
-          }
+          toDo={() => (userRole === "customer"
+            ? navigate("/customer/orders")
+            : navigate("/seller/orders"))}
           text="← Go back"
         />
         <div className="p-3 bg-violet-800 rounded-lg">
-          <p className="text-3xl font-bold text-white">{`Total: R$ ${validPrice(
-            totalPrice
-          )}`}</p>
+          <p className="text-3xl font-bold text-white">
+            {`Total: R$ ${validPrice(totalPrice)}`}
+          </p>
         </div>
       </div>
     </div>
@@ -114,9 +115,25 @@ export default function OrderDetails({
 }
 
 OrderDetails.propTypes = {
-  id: PropTypes.string.isRequired,
-  orderDetails: PropTypes.object.isRequired,
+  changeButton: PropTypes.func.isRequired,
+  id: PropTypes.shape({
+    toString: PropTypes.func,
+  }).isRequired,
+  orderDetails: PropTypes.shape({
+    orderProducts: PropTypes.arrayOf(
+      PropTypes.shape({
+        product: PropTypes.shape({
+          name: PropTypes.string,
+          price: PropTypes.number,
+        }),
+        quantity: PropTypes.number,
+      }),
+    ),
+    saleDate: PropTypes.string,
+    sellerName: PropTypes.string,
+    status: PropTypes.string,
+    totalPrice: PropTypes.string,
+  }).isRequired,
   statusColor: PropTypes.string.isRequired,
   userRole: PropTypes.string.isRequired,
-  changeButton: PropTypes.func.isRequired,
 };

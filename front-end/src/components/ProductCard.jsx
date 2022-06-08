@@ -7,10 +7,11 @@ import {
   getItemLocalStorage,
 } from "../services";
 
-export default function ProductsCard({ id, name, price, urlImage }) {
+export default function ProductsCard({
+  id, name, price, urlImage,
+}) {
   const { products, manageCart } = useContext(CartContext);
-  const localStorageQuantity =
-    getItemLocalStorage("cart")?.find((e) => e.id === id)?.quantity ?? 0;
+  const localStorageQuantity = getItemLocalStorage("cart")?.find((e) => e.id === id)?.quantity ?? 0;
   const [localQuantity, setLocalQuantity] = useState(localStorageQuantity);
   const min = 0;
   const max = 1000;
@@ -24,7 +25,9 @@ export default function ProductsCard({ id, name, price, urlImage }) {
     if (type === "add") {
       const quantity = localQuantity >= 1000 ? 1000 : localQuantity + 1;
       setLocalQuantity(quantity);
-      manageCart.add({ id: +id, price, name, quantity });
+      manageCart.add({
+        id: +id, price, name, quantity,
+      });
     }
     if (type === "remove") {
       const quantity = localQuantity <= 1 ? 0 : localQuantity - 1;
@@ -36,15 +39,20 @@ export default function ProductsCard({ id, name, price, urlImage }) {
   const handleChange = (value) => {
     const rangeValue = Math.max(min, Math.min(max, Number(value)));
     setLocalQuantity(+rangeValue);
-    manageCart.overwrite({ id: +id, quantity: value, name, price });
+    manageCart.overwrite({
+      id: +id, quantity: value, name, price,
+    });
   };
 
   return (
     <div className="shadow-lg border rounded-lg text-2xl md:text-xl lg:text-base">
       <div className="">
-        <div className="absolute m-4 bg-slate-100 rounded-md p-2 shadow-md">{`R$ ${validPrice(
-          price
-        )}`}</div>
+        <div className="absolute m-4 bg-slate-100 rounded-md p-2 shadow-md">
+          {`R$ ${validPrice(
+            price,
+          )}`}
+
+        </div>
         <img className="rounded-lg" src={urlImage} alt={name} />
       </div>
       <div className="flex items-center justify-center h-20 bg-slate-800 text-white px-10 py-4 ">

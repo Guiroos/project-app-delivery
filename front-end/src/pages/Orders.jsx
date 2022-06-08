@@ -40,27 +40,30 @@ export default function Orders() {
     if (isLoading) {
       return (
         <div className="flex w-screen h-screen items-center justify-center">
-          <img className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]" src={logo} alt="Loading" />
+          <img
+            className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]"
+            src={logo}
+            alt="Loading"
+          />
         </div>
       );
-    } else {
-      return (
-        <main className="animate-bottom">
-          <Navbar />
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 p-16">
-            {orderDetails.map((order, index) => (
-              <OrderCards
-                key={order.id}
-                order={order}
-                index={index}
-                userRole={userRole}
-                statusColor={changeStatusColor(order.status)}
-              />
-            ))}
-          </div>
-        </main>
-      );
     }
+    return (
+      <main id="orders-page" className="animate-bottom">
+        <Navbar />
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 p-16">
+          {orderDetails.map((order, index) => (
+            <OrderCards
+              key={order.id}
+              order={order}
+              index={index}
+              userRole={userRole}
+              statusColor={changeStatusColor(order.status)}
+            />
+          ))}
+        </div>
+      </main>
+    );
   };
 
   return <>{renderOrders()}</>;

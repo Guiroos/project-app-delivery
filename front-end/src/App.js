@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import RoutesApp from './routes/index';
+import RoutesApp from "./routes/index";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import { getItemLocalStorage } from "../services";
 import logo from "../images/doughnut_logo.png";
@@ -22,10 +22,10 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto w-screen h-screen">
+    <main id="login-page" className="flex flex-col items-center justify-center mx-auto w-screen h-screen">
       {isLogin && navigate(path)}
       <img src={logo} alt="logo" className="h-56 lg:h-96" />
       <LoginForm />
-    </div>
+    </main>
   );
 }

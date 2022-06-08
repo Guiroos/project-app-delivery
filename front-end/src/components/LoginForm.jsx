@@ -81,7 +81,7 @@ export default function LoginForm() {
             })}
           />
           {errors.email && (
-            <p className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
+            <p id="email-error" className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
           )}
         </div>
 
@@ -103,18 +103,19 @@ export default function LoginForm() {
             })}
           />
           {errors.password && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p id="password-error" className="mt-1 text-red-500 text-sm">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {errorMessage && (
-          <p className="mt-1 text-red-500 text-base">{errorMessage}</p>
+          <p id="login-error" className="mt-1 text-red-500 text-base">{errorMessage}</p>
         )}
 
         <div className="flex items-center justify-around text-white mt-2">
           <button
+            id="login-button"
             className="flex justify-center items-center gap-2 bg-blue-500 cursor-pointer disabled:cursor-not-allowed hover:valid:bg-blue-700 py-3 px-4 rounded-md font-bold"
             type="submit"
             disabled={!isValid}
@@ -125,6 +126,7 @@ export default function LoginForm() {
             Sign in
           </button>
           <button
+            id="register-button"
             className="bg-purple-500 hover:bg-purple-700 py-3 px-4 rounded-md font-bold cursor-pointer"
             type="button"
             onClick={() => navigate("/register")}

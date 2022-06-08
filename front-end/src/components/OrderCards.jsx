@@ -1,12 +1,16 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDate, validPrice } from "../services";
 
-export default function OrderCards({ order, index, userRole, statusColor }) {
+export default function OrderCards({
+  order, index, userRole, statusColor,
+}) {
   const navigate = useNavigate();
 
   return (
     <div
+      role="presentation"
       className="bg-gray-200 shadow-lg border rounded-lg text-2xl md:text-xl lg:text-base cursor-pointer"
       onClick={
         userRole === "customer"
@@ -40,3 +44,16 @@ export default function OrderCards({ order, index, userRole, statusColor }) {
     </div>
   );
 }
+
+OrderCards.propTypes = {
+  index: PropTypes.number.isRequired,
+  order: PropTypes.shape({
+    deliveryAddress: PropTypes.string,
+    id: PropTypes.number,
+    saleDate: PropTypes.string,
+    status: PropTypes.string,
+    totalPrice: PropTypes.string,
+  }).isRequired,
+  statusColor: PropTypes.string.isRequired,
+  userRole: PropTypes.string.isRequired,
+};

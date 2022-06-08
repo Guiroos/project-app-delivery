@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { Navbar, OrderDetails } from "../components";
 import { apiGet, changeStatusColor, getItemLocalStorage } from "../services";
 import logo from "../images/doughnut_logo.png";
@@ -36,24 +36,27 @@ export default function OrdersDetails() {
     if (isLoading) {
       return (
         <div className="flex w-screen h-screen items-center justify-center">
-          <img className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]" src={logo} alt="Loading" />
+          <img
+            className="animate-[spin_2s_linear_infinite] h-[400px] md:h-[800px]"
+            src={logo}
+            alt="Loading"
+          />
         </div>
       );
-    } else {
-      return (
-        <main className="customer_order_details animate-bottom">
-          <Navbar />
-
-          <OrderDetails
-            orderDetails={orderDetails}
-            id={id}
-            statusColor={statusColor}
-            userRole={userRole}
-            changeButton={changeButton}
-          />
-        </main>
-      );
     }
+    return (
+      <main id="oder-details-page" className="animate-bottom">
+        <Navbar />
+
+        <OrderDetails
+          orderDetails={orderDetails}
+          id={id}
+          statusColor={statusColor}
+          userRole={userRole}
+          changeButton={changeButton}
+        />
+      </main>
+    );
   };
 
   return <>{renderOrderDetails()}</>;
