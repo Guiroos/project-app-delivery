@@ -63,13 +63,13 @@ export default function RegisterForm() {
             {...register("name", {
               required: true,
               minLength: {
-                value: 1,
+                value: 2,
                 message: "Name must have at least one character",
               },
             })}
           />
           {errors.name && (
-            <p className="mt-1 text-red-500 text-sm">{errors.name.message}</p>
+            <p id="name-error" className="mt-1 text-red-500 text-sm">{errors.name.message}</p>
           )}
         </div>
 
@@ -89,7 +89,7 @@ export default function RegisterForm() {
             })}
           />
           {errors.email && (
-            <p className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
+            <p id="email-error" className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
           )}
         </div>
 
@@ -111,18 +111,19 @@ export default function RegisterForm() {
             })}
           />
           {errors.password && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p id="password-error" className="mt-1 text-red-500 text-sm">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {errorMessage && (
-          <p className="mt-1 text-red-500 text-base">{errorMessage}</p>
+          <p id="register-error" className="mt-1 text-red-500 text-base">{errorMessage}</p>
         )}
 
         <div className="flex items-center justify-around text-white mt-4">
           <button
+            id="back-button"
             className="bg-purple-500 hover:bg-purple-700 py-3 px-4 rounded-md font-bold cursor-pointer"
             type="button"
             onClick={() => navigate("/login")}
@@ -130,6 +131,7 @@ export default function RegisterForm() {
             Go back
           </button>
           <button
+            id="register-button"
             className="flex justify-center items-center gap-2 bg-blue-500 cursor-pointer disabled:cursor-not-allowed hover:valid:bg-blue-700 py-3 px-4 rounded-md font-bold"
             type="submit"
             disabled={!isValid || isLoading}
