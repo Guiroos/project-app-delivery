@@ -12,7 +12,7 @@ export default function PrivateRoute(props) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  return { children };
+  return [children];
 }
 
 PrivateRoute.propTypes = {
